@@ -1,0 +1,11 @@
+
+1, Add CSV Importer to DotNet Backend see https://stackoverflow.com/questions/7702573/importing-csv-data-into-c-sharp-classes
+2, We can only display one error as string.  Eventually we can have multiple errors to display and organized by error type.
+3, Take a look at this for graphs https://flowbite.com/docs/getting-started/quickstart/
+4, Create endpoint that just proxy to the paleodb API data and caches it for a finite amount of time instead of loading into DB. We should be able to pass it a URL, The URL will be the cache key and based on the cache status either returns or retrives data from PaleoDB and caches 
+
+Conside switching to regular bootstrap via CSS 
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+/>
