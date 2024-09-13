@@ -1,5 +1,3 @@
-import { Alert, Snackbar } from '@mui/material';
-import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
@@ -20,34 +18,34 @@ function App() {
 
   return (
     <>
-    <Snackbar>
-        <h2>Snack</h2>
-        <Alert severity="error">{JSON.stringify(errors)}</Alert>
-    </Snackbar>
+   
+        
         <Router>
             <Routes>
                 <Route path='/' element={
                     <TwoColumnPage 
-                        leftColumn={<MainLeftColumnFilters/>} 
-                        rightColumn={<IntervalsContainer/>}/>} 
+                        //leftColumn={<MainLeftColumnFilters/>} 
+                        rightColumn={<ChartsDemoPage/>}/>} 
                     />
-                {/* <Route path='/intervals' 
+                <Route path='/intervals' 
                     element={<TwoColumnPage 
-                        leftColumn={<MainLeftColumnFilters/>} 
+                        //leftColumn={<MainLeftColumnFilters/>} 
                         rightColumn={<IntervalsContainer/>}/>} 
-                /> */}
+                />
                 <Route path='/occurances' 
                     element={
-                    <TwoColumnPage leftColumn={<MainLeftColumnFilters/>} 
+                    <TwoColumnPage 
+                    //leftColumn={<MainLeftColumnFilters/>} 
                     rightColumn={<OccurrenceContainer/>}/>} 
                 />
                 <Route path='/charts' element={
-                    <TwoColumnPage leftColumn={<MainLeftColumnFilters/>} 
-                    rightColumn={<ChartsDemoPage/>}/>}
-                />
+                    <TwoColumnPage 
+                        //leftColumn={<MainLeftColumnFilters/>} 
+                        rightColumn={<ChartsDemoPage/>}/>}
+                    />
                 <Route path='/taxa' 
                     element={<TwoColumnPage 
-                        leftColumn={<MainLeftColumnFilters/>} 
+                        //leftColumn={<MainLeftColumnFilters/>} 
                         rightColumn={<TaxaContainer/>}/>} 
                 />
 

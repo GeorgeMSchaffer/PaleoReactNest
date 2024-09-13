@@ -2,7 +2,7 @@
 import React from "react";
 import { Prevalence } from "../../common/types.ts";
 import { fetchPrevalence } from "../../common/utils.ts";
-import { PrevalenceChart } from "./PrevalenceChart.tsx";
+import { PrevalenceChart } from "../diversity/DiversityBarChart.js";
 import { PrevalencelList } from "./PrevalenceList.tsx";
 export function PrevalenceContainer(){
 //    let intervals:Interval[] = [];

@@ -13,9 +13,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mui/system": "^6.1.0",
     "@reduxjs/toolkit": "^2.2.7",
     "@types/axios": "^0.14.0",
+    "@types/chart.js": "^2.9.41",
     "@types/node-fetch": "^3.0.3",
+    "@types/react-chartjs-2": "^2.5.7",
     "@types/react-virtualized": "^9.21.30",
     "@types/react-window": "^1.8.8",
     "axios": "^1.7.7",
@@ -39,6 +42,7 @@
     "react-window-infinite-loader": "^1.0.9",
     "recharts": "^2.12.7",
     "resize-observer-polyfill": "^1.5.1",
+    "styled-components": "^6.1.13",
     "vitest": "^2.0.5"
   },
   "devDependencies": {

@@ -3,13 +3,15 @@ import {
 } from 'material-react-table';
 import { Interval } from "../../common/types.js";
 import { MuiVirtualTable } from '../shared/MuiVirtualTable';
+import Grid from '@mui/material/Grid2'
+import { Container } from '@mui/material';
 interface IntervalListProps {
     intervals: Interval[]
 }
 
 export default function IntervalList(props: IntervalListProps) {
     const intervals = props.intervals || [];
-    const columns : MRT_ColumnDef<Occurrence>[] =[
+    const columns : MRT_ColumnDef<Interval>[] =[
         { accessorKey: 'intervalNo', header: 'Interval Number' },
         { accessorKey: 'intervalName', header: 'Interval Name' },
         { accessorKey: 'abbrv', header: 'Abbreviation' },
@@ -19,9 +21,9 @@ export default function IntervalList(props: IntervalListProps) {
         { accessorKey: 'referenceNo', header: 'Reference Number' }
     ];
     return (
-        <div className="p-4">
-            <b className="block mb-2 text-lg"># of Intervals {intervals.length}</b>
-            <div className="table-responsive">
+        <Grid container className="p-4">
+            <Grid size={12}><h2 className="block mb-2 text-lg"># of Intervals {intervals.length}</h2></Grid>
+            <Grid size={12} className="table-responsive">
                 <MuiVirtualTable
                     columns={columns}
                     data={intervals}
@@ -32,43 +34,8 @@ export default function IntervalList(props: IntervalListProps) {
                     //     },
                     // }}
                 />
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     );
-    // return (
-    //     <div className="p-4">
-    //         <b className="block mb-2 text-lg"># of Intervals {intervals.length}</b>
-    //         <div className="table-responsive">
-    //             <Table className="table table-striped table-bordered">
-    //                 <thead>
-    //                     <Row>
-    //                         <Col>Interval Number</Col>
-    //                         <Col>Interval Name</Col>
-    //                         <Col>Abbreviation</Col>
-    //                         <Col>Record Type</Col>
-    //                         <Col>Top Age</Col>
-    //                         <Col>Base Age</Col>
-    //                         <Col>Reference Number</Col>
-    //                     </Row>
-    //                 </thead>
-    //                 <tbody>
-    //                     {intervals && intervals.map((interval) => {
-    //                         const {intervalNo,recordType,intervalName,abbrv,tAge,bAge,referenceNo} = interval;
-    //                         return (
-    //                             <Row key={intervalNo}>
-
-    //                                 <Col>{intervalNo}</Col>
-    //                                 <Col>{intervalName}</Col>
-    //                                 <Col>{abbrv}</Col>
-    //                                 <Col>{recordType}</Col>
-    //                                 <Col>{tAge}</Col>
-    //                                 <Col>{bAge}</Col>
-    //                                 <Col>{referenceNo}</Col>
-    //                             </Row>
-    //                         );
-    //                     })}
-    //                 </tbody>
-    //             </Table>
-    //         </div>
-    //     </div>
+    
 }

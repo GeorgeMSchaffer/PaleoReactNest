@@ -1,18 +1,24 @@
-import { Alert, Snackbar } from '@mui/material';
+import { Alert, Snackbar,Container,AppBar } from '@mui/material';
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+
 import { NavLink } from 'react-router-dom';
 import { useAppSelector } from '../../store/hooks';
+import Grid from '@mui/material/Grid2';
+import { margin } from '@mui/system';
 export interface ITwoColumnPageProps {
-    leftColumn: React.ReactNode;
+    //leftColumn: React.ReactNode;
     rightColumn: React.ReactNode
 }
 export function TwoColumnPage(props: ITwoColumnPageProps) {
     const errors = useAppSelector((state) => state.root.errors);
-    const {leftColumn, rightColumn} = props;
+    const {rightColumn} = props;
     const navLinkStyle = {
-        margin: 3,
-        padding: 3,
+        margin: 2,
+        marginLeft: 4,
+        marginRight: 4,
+        padding: 1,
+        color: '#FFF',
+        
         border: '1px solid #ccc',
         textAlign: 'center' as const,
         "&:hover": {
@@ -23,52 +29,62 @@ export function TwoColumnPage(props: ITwoColumnPageProps) {
         }
         
     }
+    const linkStyle = {
+        textDecoration: 'none',
+        color: '#FFF'
+    }
+    // const leftColumn = props.leftColumn
     return (
-        <Container fluid style={{border: '1px solid red'}}>
-
-
-            <Container fluid style={{marginBottom:5}}>
+<>
+            <Container style={{marginBottom:5}}>
             <Snackbar open={errors?.length ? true : false}>
-               
-        <Alert  severity="error"><b>Errors:</b>{JSON.stringify(errors)}</Alert>
+                <>
+                <Alert  severity="error"><b>Errors:</b>{JSON.stringify(errors)}</Alert>
+                </>
     </Snackbar>
-                <Row xs={12} style={{paddingTop:5,paddingBottom:5}}>
-                <Col>Paleo Data Viewer</Col>
-                </Row>
-                <Row>
+    <AppBar>
+        
+                    <Grid container style={{paddingTop:5,paddingBottom:5}}>
 
-                <Col style={navLinkStyle} md={2}>
-                    <NavLink to="/">Home</NavLink>
-                </Col>
-                <Col style={navLinkStyle} md={2}>
-                    <NavLink to="/intervals">
-                        Intervals
-                    </NavLink>
-                </Col>
-                <Col style={navLinkStyle} md={2}>
-                    <NavLink to="/occurances">
-                        Occurances
-                    </NavLink>
-                </Col>
-                <Col style={navLinkStyle} md={2}>
-                    <NavLink to="/taxa">Taxa</NavLink>
-                </Col>
-                <Col style={navLinkStyle} md={2}>
-                    <NavLink to="/charts">All Charts</NavLink>
-                </Col>
-   
-                </Row>
+                        <Grid size={12}>
+                            <NavLink to="/">
+                                <span style={{color:'#FFF'}}>Paleo Data Viewer</span>                    
+                            </NavLink>
+                        </Grid>
+                    </Grid>
+                    <Grid container>
+                        <Grid size={2} style={navLinkStyle}>
+                            <NavLink style={linkStyle} to="/intervals">
+                                Intervals
+                            </NavLink>
+                        </Grid>
+                        <Grid size={2} style={navLinkStyle}>
+                            <NavLink style={linkStyle} to="/occurances">
+                                Occurances
+                            </NavLink>
+                        </Grid>
+                        <Grid size={2} style={navLinkStyle}>
+                            <NavLink style={linkStyle} to="/taxa">Taxa</NavLink>
+                        </Grid>
+                        <Grid size={2} style={navLinkStyle}>
+                            <NavLink style={linkStyle} to="/charts">All Charts</NavLink>
+                        </Grid>
+       
+                    </Grid>
+    </AppBar>
             </Container>
-            <Container fluid={true} style={{border:'1px solid black'}}>
-                <Row>
-                    <Col>{rightColumn}</Col>
+            <Container>
+                <Grid container>
+                    <Grid size={12}>{rightColumn}</Grid>
                 {/* <Col style={{border:'1px solid black'}} md={3}>{leftColumn}</Col>
                 <Col md={9}>
                     {rightColumn}
                 </Col> */}
-                </Row>
+                </Grid>
             </Container>
-        </Container>
+
+            </>
+
     )
     // return (
     //     <>

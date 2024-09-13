@@ -35,8 +35,8 @@ export async function searchIntervals(
   return intervals;
 }
 
-export const get = (id) => {
-  return fetch(`/api/intervals/${id}`, {
+export const getAllIntervals = () => {
+  return fetch(`/api/intervals/`, {
     method: "GET",
     headers: headers,
   });
@@ -83,8 +83,8 @@ export const findByTitle = (title) => {
 };
 
 const TutorialService = {
-  getAll: searchIntervals,
-  get,
+  searchIntervals,
+  getAllIntervals,
   create,
   update,
   remove,

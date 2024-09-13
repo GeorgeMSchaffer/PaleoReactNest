@@ -37,7 +37,25 @@ export async function searchTaxa(
   return taxa;
 }
 
-export const get = (id) => {
+export const getAllTaxa = async () => {
+  let taxa: Taxa[] = [];
+  try {
+    const response = await fetch(`/api/taxa/`, {
+      method: "GET",
+      headers: headers,
+    });
+
+    const data: TaxaJSON[] =
+      (await (response.json() as unknown as TaxaJSON[])) || [];
+    taxa = TaxaJSONToTaxa(data);
+  } catch (err) {
+    console.error(err);
+    throw err;
+  } finally {
+    return taxa;
+  }
+};
+export const getTaxaByID = (id) => {
   return fetch(`/api/taxa/${id}`, {
     method: "GET",
     headers: headers,
@@ -83,15 +101,3 @@ export const removeAll = () => {
 export const findByTitle = (title) => {
   return fetch(`/taxa?title=${title}`);
 };
-
-const TutorialService = {
-  searchTaxa,
-  get,
-  create,
-  update,
-  remove,
-  removeAll,
-  findByTitle,
-};
-
-export default TutorialService;

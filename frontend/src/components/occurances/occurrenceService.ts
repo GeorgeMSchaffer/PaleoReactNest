@@ -36,8 +36,25 @@ export async function searchOccurrances(
   console.log("🚀 ~ getAll ~ occurrences:", occurrences);
   return occurrences;
 }
-
-export const get = (id, params: IPaginationSettings) => {
+export const getAllOccurances = async (params: IPaginationSettings) => {
+  let occurrences: Occurrence[] = [];
+  try {
+    const response = await fetch(`/api/occurrences/`, {
+      method: "GET",
+      headers: headers,
+      ...params,
+    });
+    const data: OccurrenceJSON[] =
+      (await (response.json() as unknown as OccurrenceJSON[])) || [];
+    occurrences = occurrencesJSONToOccurrences(data);
+  } catch (err) {
+    console.error("Failed to retrive all occurances.ERROR:", err);
+    throw err;
+  } finally {
+    return occurrences;
+  }
+};
+export const getOccuranceByID = (id, params: IPaginationSettings) => {
   return fetch(`/api/occurrences/${id}`, {
     method: "GET",
     headers: headers,
@@ -88,15 +105,3 @@ export const removeAll = (params = {}) => {
 export const findByTitle = (title, params: IPaginationSettings) => {
   return fetch(`/occurrences?title=${title}`);
 };
-
-const TutorialService = {
-  searchOccurrances,
-  get,
-  create,
-  update,
-  remove,
-  removeAll,
-  findByTitle,
-};
-
-export default TutorialService;

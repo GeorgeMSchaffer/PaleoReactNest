@@ -1,4 +1,4 @@
-import { Form, FormGroup, FormLabel } from 'react-bootstrap';
+import { FormGroup, FormLabel, Select, SelectChangeEvent } from '@mui/material';
 
 import { ChangeEvent } from 'react';
 export interface ISelectFilterProps {
@@ -8,12 +8,12 @@ export interface ISelectFilterProps {
     onChange?: Function;
 }
 export function SelectFilter(props: ISelectFilterProps) {
-    const {options=[],label="",selectedValue=""}  = props;
+    const { options = [], label = "", selectedValue = "" } = props;
     //[TODO] event handlers like on
-    const onChange = (event: ChangeEvent<HTMLSelectElement>)=>{
+    const onChange = (event: SelectChangeEvent<unknown>) => {
         //call an optional onChange callback from the parent component
         console.log(`onChange fired for select filter ${label}`);
-        if(props.onChange){
+        if (props.onChange) {
             console.log("Calling parent's callback onChange")
             props.onChange(event);
         }
@@ -23,13 +23,13 @@ export function SelectFilter(props: ISelectFilterProps) {
             <FormLabel>
                 <div>{label} - {selectedValue}</div>
             </FormLabel>
-            <Form.Select onChange={(evt)=>onChange(evt)} multiple aria-label={`Filter By ${label}`}>
-                {options.map(option => 
-                    <option selected={selectedValue?.length && option.includes(selectedValue) ? true : false } key={option} value={selectedValue}>
+            <Select onChange={(evt) => onChange(evt)} multiple aria-label={`Filter By ${label}`} value={Array.isArray(selectedValue) ? selectedValue : [selectedValue]}>
+                {options.map(option =>
+                    <option selected={selectedValue?.length && option.includes(selectedValue) ? true : false} key={option}>
                         {option}
                     </option>
                 )}
-            </Form.Select>
+            </Select>
         </FormGroup>
     )
 }

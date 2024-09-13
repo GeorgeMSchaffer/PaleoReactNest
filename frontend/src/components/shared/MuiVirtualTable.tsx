@@ -9,14 +9,16 @@ import { useEffect, useRef, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import { Diversity, Interval, Occurrence, Prevalence, Taxa } from '../../common/types';
+import OccuranceCard from '../occurances/OccurrenceCard';
   export interface IMuiVirtualTableProps {
       data: Occurrence[] | Interval[] | Taxa[] | Diversity[] | Prevalence[];
-      columns: MRT_ColumnDef<Occurrence>[] | MRT_ColumnDef<Interval>[] | MRT_ColumnDef<Taxa>[] | MRT_ColumnDef<Diversity>[] | MRT_ColumnDef<Prevalence>[];
+      columns: MRT_ColumnDef<Occurrence, any>[] | MRT_ColumnDef<Interval, any>[] | MRT_ColumnDef<Taxa, any>[] | MRT_ColumnDef<Diversity, any>[] | MRT_ColumnDef<Prevalence, any>[];
   }
   
   export  function MuiVirtualTable(props: IMuiVirtualTableProps) {
     //[TODO] we no longer need the prop if we are doing this but be better to make it a functional component instead and passin in loading,ooccurances, pagination, and filters etc...
-    const {data,columns} = props;
+    const data: Occurrence[] | Interval[] | Taxa[] | Diversity[] | Prevalence[] = props.data;
+    const columns = props.columns;
       //   const isLoading = useAppSelector((state) => state.root.loading);
       // const pagination = useAppSelector((state) => state.occurances.settings.pagination);
       const [sorting, setSorting] = useState<MRT_SortingState>([]);

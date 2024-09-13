@@ -15,7 +15,7 @@ import occuranceSlice, {
   setOccurrences,
   setOccurrencesToDisplay,
 } from "./reducers/occurrenceReducer";
-import taxaSlice from "./reducers/taxaReducer";
+import taxaSlice, { setTaxa } from "./reducers/taxaReducer";
 import rootReducer, {
   setError,
   setLoading,
@@ -61,6 +61,7 @@ export {
   setOccurrencesToDisplay,
   setPagination,
   taxaSlice,
+  setTaxa,
 };
 console.log("store state", store.getState());
 export type RootState = ReturnType<typeof store.getState>;

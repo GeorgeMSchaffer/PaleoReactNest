@@ -4,15 +4,16 @@ import {
   type MRT_SortingState,
   useMaterialReactTable
 } from 'material-react-table';
+import {Container,Box} from '@mui/material'
+import Grid from '@mui/material/Grid2'
 import { useEffect, useRef, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
 import { Occurrence } from "../../common/types";
 import { useAppSelector } from '../../store/hooks';
 import { IntervalFilter } from '../filters';
 import { CladeOrderFilter } from '../filters/CladeOrderFilter';
 import { MuiVirtualTable } from '../shared/MuiVirtualTable';
 import { TablePagination } from '../shared/TablePagination';
+import { ListItem,List } from '@mui/material'
 export interface IOccurrenceList {
     occurances: Occurrence[];
 }
@@ -24,6 +25,17 @@ export  function OccuranceList(props: IOccurrenceList) {
     const pagination = useAppSelector((state) => state.occurances.settings.pagination);
     const [sorting, setSorting] = useState<MRT_SortingState>([]);
     const rowVirtualizerInstanceRef = useRef<MRT_RowVirtualizer>(null);
+    const numGenus = occurances.map(occurance => occurance.genus).filter((genus, index, self) => self.indexOf(genus) === index).length;
+    const numFamily = occurances.map(occurance => occurance.family).filter((family, index, self) => self.indexOf(family) === index).length;
+    const numOrder = occurances.map(occurance => occurance.order).filter((order, index, self) => self.indexOf(order) === index).length;
+    const numPhylum = occurances.map(occurance => occurance.phylum).filter((phylum, index, self) => self.indexOf(phylum) === index).length;
+    //const maxMaxMYA = occurances.map(occurance => occurance.maxMYA).reduce((a:number, b:number) => Math.max(a, b), -Infinity);
+    const minMinYA = occurances.map(occurance => Number.parseInt(occurance.MinMYA)).reduce((a:number, b:number) => Math.max(a, b), -Infinity);
+    const maxMinMYA = occurances.map(occurance => Number.parseInt(occurance.MaxMYA)).reduce((a:number, b:number) => Math.max(a, b), -Infinity);
+    const min:Occurrence = occurances.reduce((prev, current) => (prev.minMYA < current.minMYA) ? prev : current)
+    const max:Occurrence = occurances.reduce((prev, current) => (prev.maxMYA < current.maxMYA) ? prev : current);
+
+    console.log(`MAX:`, max.maxMya, 'MIN',min.minMya);
     const [totalRows, setTotalRows] = useState(0);
     //accessorKey: 'name.firstName', //access nested data with dot notation
     useEffect(() => {
@@ -119,30 +131,37 @@ const table = useMaterialReactTable<Occurrence>({
 
     return (
         <div className="p-4">
-         <Container fluid>
-          <Row>
-            <Col xs={6}>
+         <Container>
+          <Grid container>
+            <Grid size={12}>
+              <List dense>
+                
+                <ListItem> # of Genera: {numGenus}</ListItem>
+                <ListItem>{numFamily} # of Families</ListItem>
+              <ListItem> {numOrder} # of Orders</ListItem>
+              <ListItem>  {numPhylum} # of Phylums</ListItem>
+              <ListItem>Max MYA {max.maxMya}</ListItem>
+              <ListItem>Min MYA {min.minMya}</ListItem>
+              <ListItem> # of Occurances: {totalRows}</ListItem>
+              </List>
+          </Grid>
+            <Grid size={6}>
               <CladeOrderFilter/>
-            </Col>
-            <Col xs={6}>
+            </Grid>
+            <Grid size={6}>
               <IntervalFilter/>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-            <TablePagination data={occurances}/>
-            </Col>
-          </Row>
-         </Container>
-          <Container fluid>
-            <Row>
-              <Col xs={12}>
+            </Grid>
+          </Grid>
+          
+            <Grid size={12}>
+              <TablePagination data={occurances}/>
+            </Grid>
+            <Grid size={12}>
               {occurances?.length &&
                 // <MaterialReactTable table={table} />
                 <MuiVirtualTable data={occurances} columns={columns} />
               }
-              </Col>
-            </Row>
+            </Grid>
           </Container>
            
             {/* <AutoSizer>
