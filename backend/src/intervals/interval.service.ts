@@ -3,7 +3,7 @@ import { Repository,LessThan,LessThanOrEqual,MoreThan,MoreThanOrEqual } from 'ty
 import { Interval } from './interval.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import {AppDataSource } from '../common/MysqlDbConfigService';
-import { EnumIntervalType } from 'src/common/types';
+import { EnumIntervalType } from '../common/types';
 const query = `
       SELECT interval_no, interval_name, abbrev, b_age AS startMYA, t_age AS endMYA, abbrev, color, parent_no, record_type, reference_no, scale_no 
       FROM intervals

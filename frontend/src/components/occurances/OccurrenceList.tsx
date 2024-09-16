@@ -64,8 +64,8 @@ export  function OccuranceList(props: IOccurrenceList) {
         { header: 'Min MYA', accessorKey: 'minMya' },
         { header: 'Max MYA', accessorKey: 'maxMya' },
         { header: 'Phylum', accessorKey: 'phylum' },
-        { header: 'Clade', accessorKey: 'cladeClass' },
-        { header: 'Order', accessorKey: 'cladeOrder' },
+        { header: 'Clade', accessorKey: 'class' },
+        { header: 'Order', accessorKey: 'order' },
         { header: 'Family', accessorKey: 'family' },
         { header: 'Genus', accessorKey: 'genus' },
       ];

@@ -174,9 +174,9 @@ export interface Occurrence {
   latlngPrecision: number;
   geogscale: string;
   phylum: EnumPhylums;
-  cladeClass: string;
-  cladeOrder: "Cetacea";
-  family: "NO_FAMILY_SPECIFIED";
+  class: string;
+  order: string;
+  family: string
   genus: string;
 }
 
@@ -201,8 +201,8 @@ export enum EnumOccuranceFilterFields {
   latlng_precision = "latlng_precision",
   geogscale = "geogscale",
   phylum = "phylum",
-  order = "clade_class",
-  class = "clade_order",
+  order = "class",
+  class = "order",
   family = "family",
   genus = "genus",
 }
@@ -238,8 +238,8 @@ export interface OccurrenceJSON {
   latlng_precision: number;
   geogscale: string;
   phylum: EnumPhylums;
-  clade_class: string;
-  clade_order: string;
+  class: string;
+  order: string;
   family: string;
   genus: string;
 }
@@ -303,7 +303,8 @@ export interface IFilterField {
 
 export interface IOccurancesFilterField extends IFilterField {
   field: EnumOccuranceFilterFields;
-}
-export interface IIntervalsFilterField extends IFilterField {
-  field: IntervalJSON;
+// }
+// export interface IIntervalsFilterField extends IFilterField {
+//   field: IntervalJSON;
+// }
 }

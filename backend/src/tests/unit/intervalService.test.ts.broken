@@ -4,8 +4,6 @@ import * as request from 'supertest';
 import { IntervalController } from '../../intervals/interval.controller';
 //import "reflect-metadata";
 import { IntervalService } from '../../intervals/interval.service';
-import { Interval } from '../../intervals/interval.entity';
-import { EnumIntervalType } from 'src/common/types';
 
 describe('IntervalController', () => {
     let app: INestApplication;

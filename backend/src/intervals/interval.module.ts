@@ -4,7 +4,7 @@ import {intervalProviders} from './interval.providers';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {Interval} from './interval.entity';
 import {IntervalController} from './interval.controller';
-import { MysqlDbConfigService } from 'src/common/MysqlDbConfigService';
+import { MysqlDbConfigService } from '../common/MysqlDbConfigService';
 /*
 @Module({
   imports: [TypeOrmModule.forRoot()],

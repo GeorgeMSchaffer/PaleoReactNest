@@ -50,8 +50,8 @@ export function fetchOccurrences(): Occurrence[] {
           latlngPrecision: o.latlng_precision,
           geogscale: o.geogscale,
           phylum: o.phylum,
-          cladeClass: o.clade_class,
-          cladeOrder: o.clade_order,
+          class: o.class,
+          order: o.order,
           family: o.family,
           genus: o.genus,
         } as Occurrence;
@@ -88,8 +88,8 @@ export function occurrencesJSONToOccurrences(
       latlngPrecision: o.latlng_precision,
       geogscale: o.geogscale,
       phylum: o.phylum,
-      cladeClass: o.clade_class,
-      cladeOrder: o.clade_order,
+      class: o.class
+      order: o.order,
       family: o.family,
       genus: o.genus,
     } as Occurrence;

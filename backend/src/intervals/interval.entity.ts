@@ -1,5 +1,4 @@
 import { PrimaryColumn,PrimaryGeneratedColumn,Column,Table,Entity } from "typeorm";
-import { EnumIntervalType } from "src/common/types";
 @Entity('intervals',{database:'paleo'})
 //@Table("intervals")
 export class Interval {
@@ -25,7 +24,8 @@ export class Interval {
   parentNo?: number;
 
   @Column({ name: 'record_type' })
-  recordType?: EnumIntervalType;
+  //recordType?: EnumIntervalType;
+  recordType?: string;
 
   @Column({ name: 'reference_no' })
   referenceNo?: number;

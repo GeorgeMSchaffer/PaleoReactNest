@@ -1,3 +1,5 @@
+const { strict } = require("assert");
+
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -10,6 +12,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
+  strict: true,
   root: true,
   env: {
     node: true,

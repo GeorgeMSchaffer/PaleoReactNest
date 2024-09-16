@@ -2,12 +2,17 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { IntervalService } from './intervals/interval.service'; // Adjust the path as necessary
 import { IntervalModule } from './intervals/interval.module';
+import {occurrenceService} from './occurrences/occurrence.service';
+import {occurrenceModule} from './occurrences/occurrence.module';
 import {Interval} from './intervals/interval.entity';
 import { MysqlDbConfigService } from './common/MysqlDbConfigService';
 import { ConfigModule } from '@nestjs/config';
+import { Occurrence } from './occurrences/occurrence.entity';
 @Module({
   imports: [
     IntervalModule,
+    occurrenceModule,
+    occurrenceService,
     ConfigModule.forRoot({
       isGlobal: true
     }),
