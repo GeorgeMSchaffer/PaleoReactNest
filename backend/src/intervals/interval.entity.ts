@@ -1,12 +1,11 @@
-import { PrimaryColumn,PrimaryGeneratedColumn,Column,Table,Entity } from "typeorm";
+import { PrimaryGeneratedColumn, Column, Entity } from "typeorm";
 @Entity('intervals',{database:'paleo'})
-//@Table("intervals")
 export class Interval {
-  @PrimaryGeneratedColumn({name:'interval_no'})
-  intervalNo: number;
+  @PrimaryGeneratedColumn({ name: 'interval_no' })
+  intervalNo!: number;
 
-  @Column({name:'interval_name',})
-  intervalName: string;
+  @Column({ name: 'interval_name', })
+  intervalName!: string;
 
   @Column({name:'abbrev'})
   abbrev?: string;

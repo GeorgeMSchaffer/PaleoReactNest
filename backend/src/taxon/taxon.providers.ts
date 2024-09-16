@@ -1,14 +1,14 @@
 import { Connection } from 'typeorm';
-import { Occurrence } from './occurrence.entity.js';
+import { Taxon } from './taxon.entity.js';
 
-export const occurrenceProviders = [
+export const TaxonProvider = [
   {
-    provide: 'OCCURRENCE_REPOSITORY',
+    provide: 'TAXON_REPOSITORY',
     useFactory: (connection: Connection) => {
       console.log(`\r\n - connection:`, connection);
 
       
-      return connection.getRepository(Occurrence)
+      return connection.getRepository(Taxon)
     },
       inject: ['DATABASE_CONNECTION'],
   },

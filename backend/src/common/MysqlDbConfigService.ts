@@ -1,5 +1,8 @@
 import { DataSource } from "typeorm"
 import {Interval} from '../intervals/interval.entity';
+import {Occurrence} from '../occurrences/occurrence.entity';
+import {Taxa} from '../taxa/taxa.entity';
+import {Taxon} from '../taxon/taxon.entity';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
@@ -10,7 +13,7 @@ const AppDataSource = new DataSource({
     username: 'root',
     password: 'rsbr220Sql!',
     database: 'paleo',
-    entities: [Interval]
+    entities: [Interval,Occurrence,Taxon]
 });
 @Injectable()
 export class MysqlDbConfigService implements TypeOrmOptionsFactory {
@@ -27,7 +30,7 @@ export class MysqlDbConfigService implements TypeOrmOptionsFactory {
             database: 'paleo',
             logging: true,
             autoLoadEntities: true,
-            entities: [Interval]
+            entities: [Interval,Taxon,Occurrence]
         };
     }
 }

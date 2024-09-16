@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import {Interval} from './interval.entity';
 import {IntervalController} from './interval.controller';
 import { MysqlDbConfigService } from '../common/MysqlDbConfigService';
+
 /*
 @Module({
   imports: [TypeOrmModule.forRoot()],
@@ -14,7 +15,7 @@ export class IntervalModule {}
 */
 @Module({
   imports: [TypeOrmModule.forFeature([Interval])],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule,IntervalService],
   controllers: [IntervalController],
   providers: [IntervalService,MysqlDbConfigService],
 })

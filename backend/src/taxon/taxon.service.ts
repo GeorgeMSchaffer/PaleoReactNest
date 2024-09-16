@@ -7,7 +7,7 @@ import {
   MoreThanOrEqual,
   Between
 } from "typeorm";
-import { Occurrence } from './occurrence.entity';
+import { Taxon } from './taxon.entity';
 import { InjectRepository } from "@nestjs/typeorm";
 import { AppDataSource } from "../common/MysqlDbConfigService";
 //import { EnumoccurrenceType } from 'src/common/types';
@@ -47,31 +47,31 @@ import { AppDataSource } from "../common/MysqlDbConfigService";
 //     occurrences
 //     ";
 @Injectable()
-export class OccurrenceService {
+export class TaxonService {
   // constructor(
-  //   @InjectRepository(Occurrence)
-  //   private occurrenceRepository: Repository<Occurrence>
+  //   @InjectRepository(Taxon)
+  //   private occurrenceRepository: Repository<Taxon>
   // ) {}
 
 
   // Problematic nesting in services object:
- // constructor(private readonly services: { occurrences: OccurrenceService }) { }
+ // constructor(private readonly services: { occurrences: TaxonService }) { }
 
  constructor(
-  @InjectRepository(Occurrence)
-  private repo: Repository<Occurrence>,
+  @InjectRepository(Taxon)
+  private repo: Repository<Taxon>,
 ) { }
 
-  async findAll(): Promise<Occurrence[]> {
+  async findAll(): Promise<Taxon[]> {
     return this.repo.find();
   }
-  async getAll(): Promise<Occurrence[]> {
-    //return AppDataSource.query<Occurrence[]>(query);
+  async getAll(): Promise<Taxon[]> {
+    //return AppDataSource.query<Taxon[]>(query);
     return this.repo.find();
   }
-  async findById(id: number): Promise<Occurrence | null> {
+  async findById(id: number): Promise<Taxon | null> {
     const results = await this.repo.findBy({
-      occurrenceNo:id
+      taxonNo:id
     })
     if(results && results.length){
       return results.at(0)
@@ -88,14 +88,14 @@ export class OccurrenceService {
   // async getoccurrenceByStartMYA(
   //   startMYA: number,
   //   endMya: number
-  // ): Promise<Occurrence[]> {
-  //   let occurrences: Occurrence[] = [];
+  // ): Promise<Taxon[]> {
+  //   let occurrences: Taxon[] = [];
   //   //[TODO] https://orkhan.gitbook.io/typeorm/docs/find-options
   //   this.occurrenceRepository
   //     .findBy({
   //       maxMya: Between(startMYA, endMya)
   //     })
-  //     .then((data: Occurrence[]) => {
+  //     .then((data: Taxon[]) => {
   //       occurrences = data;
   //       return occurrences;
   //     })
@@ -107,7 +107,7 @@ export class OccurrenceService {
   //     });
   //   return occurrences;
   // }
-  // async createoccurrence(occurrence: Partial<Occurrence>): Promise<Occurrence> {
+  // async createoccurrence(occurrence: Partial<Taxon>): Promise<Taxon> {
   //   // Ensure non-nullable fields are provided
   //   console.log("Creating occurrence", occurrence);
   //   // if (!occurrence.acceptedName || !occurrence.abbrev || occurrence.startMYA === undefined || occurrence.endMYA === undefined) {

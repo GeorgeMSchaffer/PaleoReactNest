@@ -35,10 +35,10 @@ export class Occurrence {
   @Column({ name: "late_interval" })
   lateInterval: string;
 
-  @Column({ name: "max_mya" })
+  @Column({ name: "max_ma" })
   maxMya: number;
 
-  @Column({ name: "min_mya" })
+  @Column({ name: "min_ma" })
   minMya: number;
 
   @Column({ name: "reference_no" })
@@ -53,10 +53,7 @@ export class Occurrence {
   @Column({ name: "latlng_precision" })
   latlngPrecision: number;
 
-  @Column({ name: "latlng" })
-  latlng: string;
-
-  @Column({ name: "geoscale" })
+  @Column({ name: "geogscale" })
   geogscale: string;
 
   @Column({ name: "phylum" })
@@ -92,7 +89,6 @@ export class Occurrence {
     this.cc = '';
     this.latlngBasis = '';
     this.latlngPrecision = 0;
-    this.latlng = '';
     this.geogscale = '';
     this.phylum = '';
     this.class = '';

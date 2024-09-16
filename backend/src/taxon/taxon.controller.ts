@@ -1,13 +1,13 @@
-import { OccurrenceService } from './occurrence.service';
-import {Occurrence} from './occurrence.entity'; 
+import { TaxonService } from './taxon.service';
+import {Taxon} from './taxon.entity'; 
 //import { Controller, Get } from '@nestjs/common';
 import {Controller, Get, Param, Response} from '@nestjs/common';
 import { get } from 'http';
 
 @Controller('/api/v1/occurrences')
-export class OccurrenceController {
-  private readonly service: OccurrenceService;
-  constructor(private readonly occurrenceService: OccurrenceService) {
+export class TaxonController {
+  private readonly service: TaxonService;
+  constructor(private readonly occurrenceService: TaxonService) {
     this.service = occurrenceService;
   }
   @Get('/test')
@@ -15,7 +15,7 @@ export class OccurrenceController {
     return 'Test String';
   }
   @Get('/')
-  async getAll(): Promise<Occurrence[]> {
+  async getAll(): Promise<Taxon[]> {
     return await this.service.findAll();
   }
 
@@ -25,12 +25,12 @@ export class OccurrenceController {
    }
 
   @Get('/')
-  async findAll(): Promise<Occurrence[]> {
+  async findAll(): Promise<Taxon[]> {
     console.log('findAll called from controller');
     return this.service.findAll();
   }
    @Get('/:id')
-  async findById(@Param('id') id: number): Promise<Occurrence | null> {
+  async findById(@Param('id') id: number): Promise<Taxon | null> {
     console.log('findById called from controller');
     const occurance = await this.service.findById(id);
     return occurance;

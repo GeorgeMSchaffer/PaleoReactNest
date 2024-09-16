@@ -22,7 +22,7 @@ const query = `
   async getAll(): Promise<Interval[]> {
     return AppDataSource.query<Interval[]>(query);
   }
-  async findById(id: number): Promise<Interval>{
+  async findById(id: number): Promise<Interval|null>{
     return this.intervalRepository.findOne({
       where: { intervalNo: id },
     });
