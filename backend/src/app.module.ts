@@ -19,11 +19,16 @@ import { TaxonModule } from './taxon/taxon.module';
 import { TaxonService } from './taxon/taxon.service';
 import { TaxonController } from './taxon/taxon.controller';
 import { DevtoolsModule } from 'nestjs-devtools-loader';
+import { SpeciesModule } from './species/species.module';
+import {Strata} from './strata/strata.entity';
+import {StrataModule} from './strata/strata.module';
 @Module({
   imports: [
     IntervalModule,
     occurrenceModule,
     TaxonModule,
+    SpeciesModule,
+    StrataModule,
     ConfigModule.forRoot({
       isGlobal: true
   }),
@@ -37,7 +42,7 @@ import { DevtoolsModule } from 'nestjs-devtools-loader';
       logging: true,
       synchronize: false,
       entities: [
-        Taxon,Occurrence,Interval
+        Taxon,Occurrence,Interval,Strata
         //__dirname + '/../**/*.entity{.ts,.js}',
     ]
     })
