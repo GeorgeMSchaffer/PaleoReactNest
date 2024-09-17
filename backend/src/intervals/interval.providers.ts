@@ -5,7 +5,7 @@ export const intervalProviders = [
   {
     provide: 'INTERVAL_REPOSITORY',
     useFactory: (connection: Connection) => {
-      console.log(`\r\n - connection:`, connection);
+      console.log(`\r\n - interval.provider.ts - useFactory - connection:`, connection);
 
       
       return connection.getRepository(Interval)

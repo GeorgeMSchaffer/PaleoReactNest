@@ -60,7 +60,9 @@ export class OccurrenceService {
  constructor(
   @InjectRepository(Occurrence)
   private repo: Repository<Occurrence>,
-) { }
+) { 
+  console.log("OccurrenceService constructor");
+}
 
   async findAll(): Promise<Occurrence[]> {
     return this.repo.find();

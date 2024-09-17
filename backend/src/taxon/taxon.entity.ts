@@ -1,6 +1,5 @@
-import { PrimaryColumn, PrimaryGeneratedColumn, Column, Entity } from "typeorm";
-
-@Entity('taxon', { database: 'paleo' })
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+@Entity('taxon')
 export class Taxon {
 @PrimaryGeneratedColumn({ name: 'taxon_no' })
 taxonNo: number;

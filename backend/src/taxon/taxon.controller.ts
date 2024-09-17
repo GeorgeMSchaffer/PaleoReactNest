@@ -4,7 +4,7 @@ import {Taxon} from './taxon.entity';
 import {Controller, Get, Param, Response} from '@nestjs/common';
 import { get } from 'http';
 
-@Controller('/api/v1/occurrences')
+@Controller('/api/v1/taxa')
 export class TaxonController {
   private readonly service: TaxonService;
   constructor(private readonly occurrenceService: TaxonService) {

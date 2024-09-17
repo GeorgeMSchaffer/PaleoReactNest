@@ -9,6 +9,7 @@ import {
 } from "typeorm";
 import { Taxon } from './taxon.entity';
 import { InjectRepository } from "@nestjs/typeorm";
+//import { TaxonProvider } from "./taxon.providers";
 import { AppDataSource } from "../common/MysqlDbConfigService";
 //import { EnumoccurrenceType } from 'src/common/types';
 // const query = "
@@ -60,7 +61,9 @@ export class TaxonService {
  constructor(
   @InjectRepository(Taxon)
   private repo: Repository<Taxon>,
-) { }
+) { 
+  console.log("\r\n TAXON SERVICE constructor");
+}
 
   async findAll(): Promise<Taxon[]> {
     return this.repo.find();
