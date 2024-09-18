@@ -19,6 +19,7 @@ export class OccurrenceController {
     return await this.service.findAll();
   }
 
+
   @Get('/ping')
   async getoccurrences(): Promise<string> {
    return new Date().getTime().toString();

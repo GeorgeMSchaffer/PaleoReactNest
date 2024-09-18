@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn } from 'typeorm';
-
+import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Occurrence } from '../occurrences/occurrence.entity';
 @Entity('species')
 export class Species {
   @PrimaryColumn({ name: 'specimen_no'})
@@ -16,6 +16,13 @@ export class Species {
 
   @Column({ name: 'reid_no', type: 'int', nullable: true })
   reidNo: number;
+  
+  @OneToOne(() => Occurrence,(occurrence) => occurrence.species)
+  @JoinColumn({
+    name: 'accepted_no',
+    referencedColumnName: 'acceptedNo',
+  })
+  occurrences: Occurrence;
 
   @Column({ name: 'collection_no', type: 'text', nullable: true })
   collectionNo: string;

@@ -1,9 +1,16 @@
-import { PrimaryColumn, PrimaryGeneratedColumn, Column, Entity } from "typeorm";
-
+import { PrimaryColumn, PrimaryGeneratedColumn, Column, Entity, OneToOne, JoinColumn } from "typeorm";
+import { Species } from "../species/species.entity";
 @Entity('occurrences', { database: 'paleo' })
 export class Occurrence {
   @PrimaryGeneratedColumn({ name: 'occurrence_no' })
   occurrenceNo: number;
+
+  @OneToOne(() => Species,(species) => species.occurrences)
+  @JoinColumn({
+    name: 'accepted_no',
+    referencedColumnName: 'acceptedNo',
+  })
+  species: Species;
 
   @Column({ name: 'collection_no' })
   collectionNo: number;
