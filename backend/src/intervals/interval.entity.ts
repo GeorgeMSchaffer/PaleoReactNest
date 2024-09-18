@@ -1,8 +1,17 @@
-import { PrimaryGeneratedColumn, Column, Entity } from "typeorm";
+import { PrimaryGeneratedColumn, Column, Entity,ManyToMany,OneToMany,ManyToOne,JoinColumn,OneToOne } from "typeorm";
+
 @Entity('intervals',{database:'paleo'})
 export class Interval {
   @PrimaryGeneratedColumn({ name: 'interval_no' })
   intervalNo!: number;
+
+  @ManyToOne(() => Interval, interval => interval.children)
+  @JoinColumn({ name: 'parent_no' })
+  parent: Interval;
+
+  
+  @OneToMany(() => Interval, interval => interval.parent)
+  children: Interval[];
 
   @Column({ name: 'interval_name',nullable:true })
   intervalName!: string;

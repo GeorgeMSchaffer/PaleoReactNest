@@ -18,11 +18,14 @@ export class SpeciesService {
 ) { 
   console.log("Species constructor");
 }
-
-  async findAll(): Promise<Species[]> {
+/**
+ * Finds all
+ * @returns all 
+ */
+async findAll(): Promise<Species[]> {
     //[TODO] Create an interface to set paging values and pass it as a parameter
     return this.repo.find({
-        relations: ["occurrences"],
+       relations: ["occurrence"],
         take: 10,
         skip: 0,
         order:{
@@ -30,6 +33,12 @@ export class SpeciesService {
         }
     });
   }
+
+  // async getSpeciesByOccurrenceNo(occurrenceNo: number): Promise<Species[] | null> {
+
+
+  // }
+
   async getAll(): Promise<Species[]> {
     //return AppDataSource.query<Occurrence[]>(query);
     return this.repo.find();

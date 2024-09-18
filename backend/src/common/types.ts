@@ -86,14 +86,17 @@ export enum EnumIntervalType {
   }
   
   export interface IAppSettings {
-    pagination: IPaginationSettings;
+    pagination: IRequestParams;
   }
   
-  export interface IPaginationSettings {
-    page: number;
-    perPage: number;
-    sortBy: string;
-    sortOrder: string;
+  export interface IRequestParams {
+    take: number;
+    skip: number;
+    orderBy: string;
+    orderDir: string;
+    queryParams: {
+      [key: string]: string;
+    }
   }
   
   export interface Prevalence {

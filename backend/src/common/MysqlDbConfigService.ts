@@ -8,7 +8,7 @@ import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 //[Usefull] if we want to not use service inject but a datasource itself as in AppDataSource.findOne(1)
-const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource({
     type: 'mysql',
     host: 'localhost',
     port: 3306,
@@ -45,9 +45,7 @@ AppDataSource.initialize()
     .catch((err) => {
         console.error("Error during Data Source initialization", err)
     })
-export {
-    AppDataSource
-}
+
 // TypeOrmModule.forRoot({
 //   type: 'mysql',
 //   host: 'localhost',
