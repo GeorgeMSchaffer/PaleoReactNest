@@ -25,12 +25,14 @@ import { DevtoolsModule } from "@nestjs/devtools-integration";
 import { Strata } from "./strata/strata.entity";
 import { StrataModule } from "./strata/strata.module";
 import { Species } from "./species/species.entity";
+import { TaxaModule } from './taxa/taxa.module';
 @Module({
   imports: [
     SpeciesModule,
     IntervalModule,
     occurrenceModule,
     TaxonModule,
+    TaxaModule,
     SpeciesModule,
     DevtoolsModule.register({
       http: true,
@@ -57,7 +59,8 @@ import { Species } from "./species/species.entity";
         Species,
         //__dirname + '/../**/*.entity{.ts,.js}',
       ]
-    })
+    }),
+    
 
     // TypeOrmModule.forRoot({
     //   type: 'mysql',
