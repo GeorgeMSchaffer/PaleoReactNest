@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 @Entity('taxon')
 export class Taxon {
 @PrimaryGeneratedColumn({ name: 'taxon_no' })
@@ -34,6 +34,6 @@ referenceNo: number;
 @Column({ name: 'is_extant' })
 isExtant: string;
 
-@Column({ name: 'num_occurances' })
+@Column({ name: 'n_occs' })
 numOccurances: number;
 }

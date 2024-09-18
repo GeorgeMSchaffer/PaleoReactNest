@@ -1,9 +1,9 @@
 import { Connection } from 'typeorm';
 import { Strata } from './strata.entity.js';
 
-export const occurrenceProviders = [
+export const StrataProviders = [
   {
-    provide: 'Strata_REPOSITORY',
+    provide: 'STRATA_REPOSITORY',
     useFactory: (connection: Connection) => {
       console.log(`\r\n - Strata.provider.ts - useFactory - connection:`, connection);
 
