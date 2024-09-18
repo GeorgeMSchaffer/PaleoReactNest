@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm"
 import {Taxon} from '../taxon/taxon.entity';
-import {Interval} from '../intervals/interval.entity';
-import {Occurrence} from '../occurrences/occurrence.entity';
+import {Interval} from '../interval/entities/interval.entity';
+import {Occurrence} from '../occurrence/entities/occurrence.entity';
 // import {Taxa} from '../taxa/taxa.entity';
 // import {Taxon} from '../taxon/taxon.entity';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";

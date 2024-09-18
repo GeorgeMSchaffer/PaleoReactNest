@@ -4,33 +4,31 @@ import { SpeciesController } from "./species/species.controller";
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Interval } from "./intervals/interval.entity";
-import { IntervalService } from "./intervals/interval.service"; // Adjust the path as necessary
-import { IntervalModule } from "./intervals/interval.module";
-import { IntervalController } from "./intervals/interval.controller";
+import { Interval } from "./interval/entities/interval.entity";
+import { IntervalService } from "./interval/interval.service"; // Adjust the path as necessary
+import { IntervalModule } from "./interval/interval.module";
+import { IntervalController } from "./interval/interval.controller";
 import { MysqlDbConfigService } from "./common/MysqlDbConfigService";
-import { OccurrenceService } from "./occurrences/occurrence.service";
-import { occurrenceModule } from "./occurrences/occurrence.module";
-import { OccurrenceController } from "./occurrences/occurrence.controller";
-import { Occurrence } from "./occurrences/occurrence.entity";
+import { OccurrenceService } from "./occurrence/occurrence.service";
+import { OccurrenceModule } from "./occurrence/occurrence.module";
+import { OccurrenceController } from "./occurrence/occurrence.controller";
+import { Occurrence } from "./occurrence/entities/occurrence.entity";
 // import { TaxaModule } from './taxa/taxa.module';
 // import { Taxa } from './taxa/taxa.entity';
 // import { TaxaController } from './taxa/taxa.controller';
 // import { TaxonService } from './taxon/taxon.service';
 import { Taxon } from "./taxon/taxon.entity";
 import { TaxonModule } from "./taxon/taxon.module";
-import { TaxonService } from "./taxon/taxon.service";
-import { TaxonController } from "./taxon/taxon.controller";
 import { DevtoolsModule } from "@nestjs/devtools-integration";
 import { Strata } from "./strata/strata.entity";
-import { StrataModule } from "./strata/strata.module";
 import { Species } from "./species/species.entity";
 import { TaxaModule } from './taxa/taxa.module';
+
 @Module({
   imports: [
     SpeciesModule,
     IntervalModule,
-    occurrenceModule,
+    OccurrenceModule,
     TaxonModule,
     TaxaModule,
     SpeciesModule,
@@ -50,7 +48,7 @@ import { TaxaModule } from './taxa/taxa.module';
       password: "rsbr220Sql!",
       database: "paleo",
       logging: true,
-      synchronize: false,
+      synchronize: true,
       entities: [
         Taxon,
         Occurrence,
@@ -60,6 +58,7 @@ import { TaxaModule } from './taxa/taxa.module';
         //__dirname + '/../**/*.entity{.ts,.js}',
       ]
     }),
+    OccurrenceModule,
     
 
     // TypeOrmModule.forRoot({
