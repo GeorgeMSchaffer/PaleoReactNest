@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm"
-import {Taxon} from '../taxon/taxon.entity';
+import {Taxa} from '../taxa/entities/taxa.entity';
 import {Interval} from '../interval/entities/interval.entity';
+import {Species} from '../species/entities/species.entity';
 import {Occurrence} from '../occurrence/entities/occurrence.entity';
 // import {Taxa} from '../taxa/taxa.entity';
 // import {Taxon} from '../taxon/taxon.entity';
@@ -15,7 +16,7 @@ export const AppDataSource = new DataSource({
     username: 'root',
     password: 'rsbr220Sql!',
     database: 'paleo',
-    entities: [Interval,Occurrence,Taxon]
+    entities: [Interval,Occurrence,Taxa,Species]
 });
 @Injectable()
 export class MysqlDbConfigService implements TypeOrmOptionsFactory {
@@ -34,7 +35,7 @@ export class MysqlDbConfigService implements TypeOrmOptionsFactory {
             database: 'paleo',
             logging: true,
             autoLoadEntities: true,
-            entities: [Interval,Occurrence,Taxon]
+            entities: [Interval,Occurrence,Taxa,Species]
         };
     }
 }

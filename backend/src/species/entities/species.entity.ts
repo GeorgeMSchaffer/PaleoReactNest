@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, OneToOne, JoinColumn } from 'typeorm';
-import { Occurrence } from '../occurrence/entities/occurrence.entity';
+import { Occurrence } from '../../occurrence/entities/occurrence.entity';
 @Entity('species')
 export class Species {
   @PrimaryColumn({ name: 'specimen_no'})
@@ -22,7 +22,7 @@ export class Species {
     name: 'accepted_no',
     referencedColumnName: 'acceptedNo',
   })
-  occurrences: Occurrence;
+  occurrence?: Occurrence;
 
   @Column({ name: 'collection_no', type: 'text', nullable: true })
   collectionNo: string;

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOccurrenceDto } from './dto/create-occurrence.dto';
 import { UpdateOccurrenceDto } from './dto/update-occurrence.dto';
-import { Occurrence } from 'src/occurrences-bak/occurrence.entity';
+import { Occurrence } from '../occurrence/entities/occurrence.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 

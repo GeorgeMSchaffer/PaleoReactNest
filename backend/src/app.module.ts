@@ -1,4 +1,3 @@
-import { SpeciesModule } from "./species/species.module";
 import { SpeciesService } from "./species/species.service";
 import { SpeciesController } from "./species/species.controller";
 import { Module } from "@nestjs/common";
@@ -13,23 +12,18 @@ import { OccurrenceService } from "./occurrence/occurrence.service";
 import { OccurrenceModule } from "./occurrence/occurrence.module";
 import { OccurrenceController } from "./occurrence/occurrence.controller";
 import { Occurrence } from "./occurrence/entities/occurrence.entity";
-// import { TaxaModule } from './taxa/taxa.module';
-// import { Taxa } from './taxa/taxa.entity';
-// import { TaxaController } from './taxa/taxa.controller';
-// import { TaxonService } from './taxon/taxon.service';
-import { Taxon } from "./taxon/taxon.entity";
-import { TaxonModule } from "./taxon/taxon.module";
 import { DevtoolsModule } from "@nestjs/devtools-integration";
 import { Strata } from "./strata/strata.entity";
-import { Species } from "./species/species.entity";
+import { Species } from "./species/entities/species.entity";
 import { TaxaModule } from './taxa/taxa.module';
-
+import {Taxa} from "./taxa/entities/taxa.entity";
+import { SpeciesModule } from './species/species.module';
 @Module({
   imports: [
     SpeciesModule,
     IntervalModule,
+    SpeciesModule,
     OccurrenceModule,
-    TaxonModule,
     TaxaModule,
     SpeciesModule,
     DevtoolsModule.register({
@@ -50,7 +44,7 @@ import { TaxaModule } from './taxa/taxa.module';
       logging: true,
       synchronize: true,
       entities: [
-        Taxon,
+        Taxa,
         Occurrence,
         Interval,
         Strata,

@@ -1,59 +1,50 @@
-import { Injectable } from "@nestjs/common";
-import {
-  Repository,
-  LessThan,
-  LessThanOrEqual,
-  MoreThan,
-  MoreThanOrEqual,
-  Between
-} from "typeorm";
-import { Species } from './species.entity';
-import { InjectRepository } from "@nestjs/typeorm";
-import { AppDataSource } from "../common/MysqlDbConfigService";
+import { Injectable } from '@nestjs/common';
+import { CreateSpeciesDto } from './dto/create-species.dto';
+import { UpdateSpeciesDto } from './dto/update-species.dto';
+import { Species } from './entities/species.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { IRequestParams } from "../common/types"
 @Injectable()
 export class SpeciesService {
- constructor(
-  @InjectRepository(Species)
-  private repo: Repository<Species>,
-) { 
-  console.log("Species constructor");
-}
-/**
- * Finds all
- * @returns all 
- */
-async findAll(): Promise<Species[]> {
-    //[TODO] Create an interface to set paging values and pass it as a parameter
+  constructor(
+    @InjectRepository(Species)
+    private repo: Repository<Species>,
+  ) { 
+    console.log("Species constructor");
+  }
+  
+  create(createSpeciesDto: CreateSpeciesDto) {
+    return this.repo.save(createSpeciesDto);
+  }
+
+  findAll(params:IRequestParams) {
+    const filters = params.queryParams;
+    console.log("🚀 ~ SpeciesService ~ findAll ~ filters:", filters)
+
     return this.repo.find({
-       relations: ["occurrence"],
-        take: 10,
-        skip: 0,
-        order:{
-            occurrenceNo: "DESC"
-        }
+      relationLoadStrategy: "join",
+        
+      order: {
+        [params.orderBy]: params.orderDir
+      },
+      take: params.take,
+      skip: params.skip,
+      relations: ['occurence'],
+      where: {...filters},
+      cache: true,
     });
   }
 
-  // async getSpeciesByOccurrenceNo(occurrenceNo: number): Promise<Species[] | null> {
-
-
-  // }
-
-  async getAll(): Promise<Species[]> {
-    //return AppDataSource.query<Occurrence[]>(query);
-    return this.repo.find();
-  }
-  async findById(id: number): Promise<Species | null> {
-    const results = await this.repo.findBy({
-      specimenNo:id
-    })
-    if(results && results.length){
-      return results.at(0)
-    }
-    return null;
+  findOne(id: number) {
+    return this.repo.findOneBy({ specimenNo: id });
   }
 
-  helloWorld(): string {
-    return "hello";
+  update(id: number, updateSpeciesDto: UpdateSpeciesDto) {
+    return this.repo.update(id, updateSpeciesDto);
+  }
+
+  remove(id: number) {
+    return this.repo.delete(id);
   }
 }

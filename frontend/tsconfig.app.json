@@ -41,6 +41,7 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "strict": true,
+    "resolvePackageJsonImports": true,
     "paths": {
       "@/*": ["./*"]
     },
