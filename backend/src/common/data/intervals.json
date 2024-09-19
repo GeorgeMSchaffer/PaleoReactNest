@@ -1,6 +1,5 @@
-{
-  "intervals": [
-    {
+ [
+     {
       "interval_no": "751",
       "record_type": "int",
       "scale_no": "1",
@@ -2089,4 +2088,3 @@
       "reference_no": "87596"
     }
   ]
-}
