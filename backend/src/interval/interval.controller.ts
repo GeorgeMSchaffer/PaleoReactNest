@@ -1,51 +1,55 @@
-import { Controller,Req, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller,Req, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { IntervalService } from './interval.service';
 import { CreateIntervalDto } from './dto/create-interval.dto';
 import { UpdateIntervalDto } from './dto/update-interval.dto';
+import { IRequestParams } from 'src/common/types';
+import { buildRequestParams } from 'src/common/utils';
 
 @Controller('/api/v1/interval')
 export class IntervalController {
-  constructor(private readonly intervalService: IntervalService) {}
+  constructor(private readonly service: IntervalService) {}
 
   @Post("/")
   create(@Body() createIntervalDto: CreateIntervalDto) {
-    return this.intervalService.create(createIntervalDto);
+    return this.service.create(createIntervalDto);
   }
 
   @Get("/")
-  findAll() {
-    return this.intervalService.findAll();
+  findAll(@Query() query) {
+    const params:IRequestParams = buildRequestParams(query);
+
+    return this.service.findAll(params);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.intervalService.findOne(+id);
+    return this.service.findOne(+id);
   }
 
   @Get('/ages')
   getAges() {
-    return this.intervalService.findByRecordType('age');
+    return this.service.findByRecordType('age');
   }
   @Get('/eons')
   getEons() {
-    return this.intervalService.findByRecordType('eon');
+    return this.service.findByRecordType('eon');
   }
   @Get('/periods')
   getPeriods() {
-    return this.intervalService.findByRecordType('period');
+    return this.service.findByRecordType('period');
   }
   @Get('/epochs')
   getEpochs() {
-    return this.intervalService.findByRecordType('epoch');
+    return this.service.findByRecordType('epoch');
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateIntervalDto: UpdateIntervalDto) {
-    return this.intervalService.update(+id, updateIntervalDto);
+    return this.service.update(+id, updateIntervalDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.intervalService.remove(+id);
+    return this.service.remove(+id);
   }
 }

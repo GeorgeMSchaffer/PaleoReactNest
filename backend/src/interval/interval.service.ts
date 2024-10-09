@@ -4,6 +4,7 @@ import { UpdateIntervalDto } from './dto/update-interval.dto';
 import { Interval } from './entities/interval.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { IRequestParams } from 'src/common/types';
 
 @Injectable()
 export class IntervalService {
@@ -16,9 +17,20 @@ export class IntervalService {
     return this.repo.save(createIntervalDto);
   }
 
-  findAll() {
+  findAll(params:IRequestParams) {
     //return `This action returns all interval`;
-    return this.repo.find();
+    const filters = params.queryParams;
+
+    return this.repo.find({
+      order: {
+        [params.orderBy]: params.orderDir
+      },
+      take: params.take,
+      skip: params.skip,
+      relations: ['species'],
+      where: {...filters},
+//      cache: true,
+    });
   }
 
   findOne(id: number) {

@@ -10,6 +10,7 @@ import {
 import { Strata } from './strata.entity';
 import { InjectRepository } from "@nestjs/typeorm";
 import { AppDataSource } from "../common/MysqlDbConfigService";
+import { IRequestParams } from "src/common/types";
 //import { EnumoccurrenceType } from 'src/common/types';
 @Injectable()
 export class StrataService {
@@ -21,7 +22,19 @@ export class StrataService {
   console.log("Strata Service constructor");
 }
 
-  async findAll(): Promise<Strata[]> {
+  async findAll(params:IRequestParams): Promise<Strata[]> {
+    const filters = params.queryParams;
+    console.log("🚀 ~ OccurrenceService ~ findAll ~ filters:", filters)
+
+    return this.repo.find({
+      order: {
+        [params.orderBy]: params.orderDir
+      },
+      take: params.take,
+      skip: params.skip,
+      where: {...filters},
+//      cache: true,
+    });
     return this.repo.find();
   }
   async getAll(): Promise<Strata[]> {

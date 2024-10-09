@@ -1,9 +1,9 @@
 import { StrataService } from './strata.service';
 import {Strata} from './strata.entity'; 
 //import { Controller, Get } from '@nestjs/common';
-import {Controller, Get, Param, Response} from '@nestjs/common';
-import { get } from 'http';
-
+import {Controller, Get, Param, Query, Response} from '@nestjs/common';
+import {IRequestParams} from "../common/types"
+import {buildRequestParams} from "../common/utils"
 @Controller('/api/v1/strata')
 export class StrataController {
   private readonly service: StrataService;
@@ -14,10 +14,7 @@ export class StrataController {
   getHello(): string {
     return 'Test String';
   }
-  @Get('/')
-  async getAll(): Promise<Strata[]> {
-    return await this.service.findAll();
-  }
+
 
   @Get('/ping')
   async getstratas(): Promise<string> {
@@ -25,9 +22,11 @@ export class StrataController {
    }
 
   @Get('/')
-  async findAll(): Promise<Strata[]> {
+  async findAll(@Query() query): Promise<Strata[]> {
     console.log('findAll called from controller');
-    return this.service.findAll();
+    const params:IRequestParams = buildRequestParams(query);
+
+    return this.service.findAll(params);
   }
    @Get('/:id')
   async findById(@Param('id') id: number): Promise<Strata | null> {

@@ -6,7 +6,7 @@ const headers = {
 export async function getAll(): Promise<Diversity[]> {
   let diversity: Diversity[] = [];
   try {
-    const response = await fetch("/api/diversitys", {
+    const response = await fetch("/api/diversity/", {
       method: "GET",
       headers: headers,
     }); // as unknown as DiversityJSON[];
@@ -25,14 +25,14 @@ export async function getAll(): Promise<Diversity[]> {
 }
 
 export const get = (id) => {
-  return fetch(`/api/diversitys/${id}`, {
+  return fetch(`/api/diversity/${id}`, {
     method: "GET",
     headers: headers,
   });
 };
 
 export const create = (data) => {
-  return fetch("/api/diversitys", {
+  return fetch("/api/diversity", {
     method: "POST",
     headers: headers,
     body: JSON.stringify(data), // body data type must match "Content-Type" header
@@ -40,7 +40,7 @@ export const create = (data) => {
 };
 
 export const update = (id, data) => {
-  return fetch(`/api/diversitys/${id}`, {
+  return fetch(`/api/diversity/${id}`, {
     method: "PUT",
     headers: headers,
     body: JSON.stringify(data),
@@ -48,7 +48,7 @@ export const update = (id, data) => {
 };
 
 export const remove = (id) => {
-  return fetch(`/api/diversitys/${id}`, {
+  return fetch(`/api/diversity/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export const remove = (id) => {
 };
 
 export const removeAll = () => {
-  return fetch(`/api/diversitys`, {
+  return fetch(`/api/diversity`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export const removeAll = () => {
 };
 
 export const findByTitle = (title) => {
-  return fetch(`/diversitys?title=${title}`);
+  return fetch(`/diversity?title=${title}`);
 };
 
 const TutorialService = {

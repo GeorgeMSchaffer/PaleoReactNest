@@ -36,7 +36,7 @@ export async function searchIntervals(
 }
 
 export const getAllIntervals = () => {
-  return fetch(`/api/intervals/`, {
+  return fetch(`/api/interval/`, {
     method: "GET",
     headers: headers,
   });
@@ -51,7 +51,7 @@ export const create = (data) => {
 };
 
 export const update = (id, data) => {
-  return fetch(`/api/intervals/${id}`, {
+  return fetch(`/api/interval/${id}`, {
     method: "PUT",
     headers: headers,
     body: JSON.stringify(data),
@@ -59,7 +59,7 @@ export const update = (id, data) => {
 };
 
 export const remove = (id) => {
-  return fetch(`/api/intervals/${id}`, {
+  return fetch(`/api/interval/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, OneToOne, JoinColumn, ManyToMany } from 'typeorm';
 import { Occurrence } from '../../occurrence/entities/occurrence.entity';
 @Entity('species')
 export class Species {
@@ -15,75 +15,75 @@ export class Species {
   occurrenceNo: string;
 
   @Column({ name: 'reid_no', type: 'int', nullable: true })
-  reidNo: number;
+  reidNo?: number;
   
-  @OneToOne(() => Occurrence,(occurrence) => occurrence.species)
+  @ManyToMany(() => Occurrence,(occurrence) => occurrence.species)
   @JoinColumn({
-    name: 'accepted_no',
-    referencedColumnName: 'acceptedNo',
+    name: 'occurrence_no',
+    referencedColumnName: 'occurrenceNo',
   })
-  occurrence?: Occurrence;
+  occurrences?: Occurrence[];
 
   @Column({ name: 'collection_no', type: 'text', nullable: true })
-  collectionNo: string;
+  collectionNo?: string;
 
   @Column({ name: 'specimen_id', type: 'text', nullable: true })
-  specimenId: string;
+  specimenId?: string;
 
   @Column({ name: 'is_type', type: 'text', nullable: true })
-  isType: string;
+  isType?: string;
 
   @Column({ name: 'specelt_no', type: 'text', nullable: true })
-  speceltNo: string;
+  speceltNo?: string;
 
   @Column({ name: 'specimen_side', type: 'text', nullable: true })
-  specimenSide: string;
+  specimenSide?: string;
 
   @Column({ name: 'specimen_part', type: 'text', nullable: true })
-  specimenPart: string;
+  specimenPart?: string;
 
   @Column({ name: 'specimen_sex', type: 'text', nullable: true })
-  specimenSex: string;
+  specimenSex?: string;
 
   @Column({ name: 'n_measured', type: 'int', nullable: true })
-  nMeasured: number;
+  nMeasured?: number;
 
   @Column({ name: 'measurement_source', type: 'text', nullable: true })
-  measurementSource: string;
+  measurementSource?: string;
 
   @Column({ name: 'magnification', type: 'text', nullable: true })
-  magnification: string;
+  magnification?: string;
 
   @Column({ name: 'comments', type: 'text', nullable: true })
-  comments: string;
+  comments?: string;
 
   @Column({ name: 'identified_name', type: 'text', nullable: true })
-  identifiedName: string;
+  identifiedName?: string;
 
   @Column({ name: 'identified_rank', type: 'text', nullable: true })
-  identifiedRank: string;
+  identifiedRank?: string;
 
   @Column({ name: 'identified_no', type: 'int', nullable: true })
-  identifiedNo: number;
+  identifiedNo?: number;
 
   @Column({ name: 'difference', type: 'text', nullable: true })
-  difference: string;
+  difference?: string;
 
   @Column({ name: 'accepted_name', type: 'text', nullable: true })
-  acceptedName: string;
+  acceptedName?: string;
 
   @Column({ name: 'accepted_rank', type: 'text', nullable: true })
-  acceptedRank: string;
+  acceptedRank?: string;
 
   @Column({ name: 'accepted_no', type: 'int', nullable: true })
-  acceptedNo: number;
+  acceptedNo?: number;
 
   @Column({ name: 'max_ma', type: 'text', nullable: true })
-  maxMa: string;
+  maxMa?: string;
 
   @Column({ name: 'min_ma', type: 'text', nullable: true })
-  minMa: string;
+  minMa?: string;
 
   @Column({ name: 'reference_no', type: 'int', nullable: true })
-  referenceNo: number;
+  referenceNo?: number;
 }

@@ -20,7 +20,7 @@
     "@reduxjs/toolkit": "2.2.7",
     "@types/axios": "0.14.0",
     "@types/chart.js": "2.9.41",
-    "@types/node-fetch": "2.6.11",
+    "@types/node-fetch": "3.0.3",
     "@types/react-chartjs-2": "2.5.7",
     "@types/react-virtualized": "9.21.30",
     "@types/react-window": "1.8.8",

@@ -88,7 +88,7 @@ export function occurrencesJSONToOccurrences(
       latlngPrecision: o.latlng_precision,
       geogscale: o.geogscale,
       phylum: o.phylum,
-      class: o.class
+      class: o.class,
       order: o.order,
       family: o.family,
       genus: o.genus,
@@ -178,7 +178,7 @@ export function diversityJSONToDiversity(
 export function fetchPrevalence(): Prevalence[] {
   let prevalence: Prevalence[] = [];
   console.log("fetching prevalence data");
-  const response = fetch("/prevalence/", {
+  const response = fetch("/prevalence /", {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   })
@@ -216,7 +216,7 @@ export function prevalenceToPrevalenceJSON(
 
 export function fetchIntervals(): Interval[] {
   let intervals: Interval[] = [];
-  fetch("/intervals", {
+  fetch("/interval", {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   })
@@ -324,9 +324,9 @@ export const buildApiUrl = (
   const { page, perPage, sortBy } = pagination;
   //  const start = (page * perPage);
   var start = page * perPage;
-  var end = page * perPage + perPage;
+  var skip = page * perPage + perPage;
 
-  let url = `/api/${entity}/?_start=${start}&_end=${end}&`;
+  let url = `/api/${entity}/?take=${perPage}&skip=${skip}&`;
   filters.map((filter) => {
     url += `record_type${filter.operator}${filter.value}&`;
     //[TODO] add filter.operator vs static equals
