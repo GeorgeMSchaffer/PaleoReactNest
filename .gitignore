@@ -133,3 +133,4 @@ dist
 .ideacache
 .idea
 .DS_Store
+/PROJECT_DATA
