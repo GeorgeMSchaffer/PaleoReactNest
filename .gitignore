@@ -134,3 +134,4 @@ dist
 .idea
 .DS_Store
 /PROJECT_DATA
+/backend/src/common/data
