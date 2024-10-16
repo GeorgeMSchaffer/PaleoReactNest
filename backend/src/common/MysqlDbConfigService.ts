@@ -3,6 +3,7 @@ import {Taxa} from '../taxa/entities/taxa.entity';
 import {Interval} from '../interval/entities/interval.entity';
 import {Species} from '../species/entities/species.entity';
 import {Occurrence} from '../occurrence/entities/occurrence.entity';
+import { Diversity } from "src/occurrence/DTOs/diversity.dto";
 // import {Taxa} from '../taxa/taxa.entity';
 // import {Taxon} from '../taxon/taxon.entity';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
@@ -15,6 +16,7 @@ export const AppDataSource = new DataSource({
     port: 3306,
     username: 'root',
     password: 'rsbr220Sql!',
+    synchronize: false,
     database: 'paleo',
     entities: [Interval,Occurrence,Taxa,Species]
 });
@@ -34,7 +36,7 @@ export class MysqlDbConfigService implements TypeOrmOptionsFactory {
             password: 'rsbr220Sql!',
             database: 'paleo',
             logging: true,
-            autoLoadEntities: true,
+            synchronize:false,
             entities: [Interval,Occurrence,Taxa,Species]
         };
     }

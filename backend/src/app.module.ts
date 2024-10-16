@@ -15,9 +15,11 @@ import { Occurrence } from "./occurrence/entities/occurrence.entity";
 import { DevtoolsModule } from "@nestjs/devtools-integration";
 import { Strata } from "./strata/strata.entity";
 import { Species } from "./species/entities/species.entity";
-import { TaxaModule } from './taxa/taxa.module';
-import {Taxa} from "./taxa/entities/taxa.entity";
-import { SpeciesModule } from './species/species.module';
+import { TaxaModule } from "./taxa/taxa.module";
+import { Taxa } from "./taxa/entities/taxa.entity";
+import { SpeciesModule } from "./species/species.module";
+
+
 @Module({
   imports: [
     SpeciesModule,
@@ -48,12 +50,11 @@ import { SpeciesModule } from './species/species.module';
         Occurrence,
         Interval,
         Strata,
-        Species,
+        Species
         //__dirname + '/../**/*.entity{.ts,.js}',
       ]
     }),
-    OccurrenceModule,
-    
+    OccurrenceModule
 
     // TypeOrmModule.forRoot({
     //   type: 'mysql',

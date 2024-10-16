@@ -26,3 +26,23 @@ GET {{host}}occs/list.json?vocab=pbdb&all_records&interval=permian
 GET http://localhost:8080/intervals
 ###
 GET http://localhost:8080/diversity
+
+###
+GET https://paleobiodb.org/data1.2/occs/list.json?&interval_id=652&vocab=pbdb&show=attr,class,phylo,genus,subgenus,ident,img,plant,abund,ecospace,coords,env,geo,paleoloc,loc,coll,taphonomy,timecompare,strat,time HTTP/1.1
+
+###
+# 957 - 
+# Lopingian 
+
+# 652,Olenekian,247.2
+# 653,Induan,251.2
+# 3,Paleozoic,251.902
+# 17,Permian,251.902
+# 771,Lopingian,251.902
+# 715,Changhsingian,251.902
+# 716,Wuchiapingian,254.14
+
+    "errors": [
+
+   "bad value 'all_records' for 'show': must be one of 'full', 'acconly', 'attr', 'class', 'classext', 'phylo', 'genus', 'subgenus', 'ident', 'rem', 'img', 'plant', 'abund', 'ecospace', 'ttaph', 'taphonomy', 'etbasis', 'pres', 'coll', 'coords', 'loc', 'bin', 'paleoloc', 'prot', 'time', 'timebins', 'timecompare', 'strat', 'stratext', 'lith', 'lithext', 'methods', 'env', 'geo', 'ctaph', 'comps', 'ref', 'refattr', 'resgroup', 'ent', 'entname', 'crmod'"
+    ],

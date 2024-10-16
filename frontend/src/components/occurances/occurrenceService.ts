@@ -39,7 +39,7 @@ export async function searchOccurrances(
 export const getAllOccurances = async (params: IPaginationSettings) => {
   let occurrences: Occurrence[] = [];
   try {
-    const response = await fetch(`/api/occurrences/`, {
+    const response = await fetch(`/api/occurrence/`, {
       method: "GET",
       headers: headers,
       ...params,
@@ -55,15 +55,16 @@ export const getAllOccurances = async (params: IPaginationSettings) => {
   }
 };
 export const getOccuranceByID = (id, params: IPaginationSettings) => {
-  return fetch(`/api/occurrences/${id}`, {
+  return fetch(`/api/occurrence/${id}`, {
     method: "GET",
     headers: headers,
     ...params,
   });
 };
 
+
 export const create = (data, params: IPaginationSettings) => {
-  return fetch("/api/occurrences/?_start=10&_end=20", {
+  return fetch("/api/occurrence/?_start=10&_end=20", {
     method: "POST",
     headers: headers,
     body: JSON.stringify(data), // body data type must match "Content-Type" header
@@ -72,7 +73,7 @@ export const create = (data, params: IPaginationSettings) => {
 };
 
 export const update = (id, data, params: IPaginationSettings) => {
-  return fetch(`/api/occurrences/${id}`, {
+  return fetch(`/api/occurrence/${id}`, {
     method: "PUT",
     headers: headers,
     body: JSON.stringify(data),
@@ -81,7 +82,7 @@ export const update = (id, data, params: IPaginationSettings) => {
 };
 
 export const remove = (id, params: IPaginationSettings) => {
-  return fetch(`/api/occurrences/${id}`, {
+  return fetch(`/api/occurrence/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

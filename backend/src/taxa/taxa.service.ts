@@ -4,6 +4,7 @@ import { UpdateTaxaDto } from './dto/update-taxa.dto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import {Taxa} from "./entities/taxa.entity";
+import { IRequestParams } from "../common/types"
 @Injectable()
 export class TaxaService {
    
@@ -17,8 +18,17 @@ export class TaxaService {
     //return 'This action adds a new taxa';
   }
 
-  findAll() {
-    return this.repo.find();
+  findAll(params:IRequestParams) {
+    const filters = params.queryParams;
+
+    return this.repo.find({
+      order: {
+        [params.orderBy]: params.orderDir
+      },
+      take: params.take,
+      skip: params.skip,
+      where: {...filters},
+    });
 //    return `This action returns all taxa`;
   }
 

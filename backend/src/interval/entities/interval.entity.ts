@@ -1,46 +1,36 @@
-import { PrimaryGeneratedColumn, Column, Entity,ManyToMany,OneToMany,ManyToOne,JoinColumn,OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
+import { Occurrence } from '../../occurrence/entities/occurrence.entity';
 
-@Entity('intervals',{database:'paleo'})
+@Entity('intervals')
 export class Interval {
-  @PrimaryGeneratedColumn({ name: 'interval_no' })
-  intervalNo!: number;
 
-  @ManyToOne(() => Interval, interval => interval.children)
-  @JoinColumn({ name: 'parent_no' })
-  parent: Interval;
+    @PrimaryGeneratedColumn()
+    intervalNo: number;
 
-  
-  @OneToMany(() => Interval, interval => interval.parent)
-  children: Interval[];
+    @Column({ type: 'varchar', length: 512, nullable: true })
+    intervalName: string;
 
-  @Column({ name: 'interval_name',nullable:true })
-  intervalName!: string;
+    // @OneToMany(() => Occurrence, occurrence => occurrence.interval)
+    // occurrences: Occurrence[];
 
-  @Column({name:'abbrev',nullable:true})
-  abbrev?: string;
+    @Column({type: 'integer', nullable: true})
+    minMa: number;
 
-  @Column({ name: 'b_age',nullable:true })
-  startMYA?: number;
+    @Column({type: 'integer', nullable: true})
+    maxMa: number;
 
-  @Column({ name: 't_age',nullable:true })
-  endMYA?: number;
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    color: string;
 
-  @Column({ name: 'color',nullable:true })
-  color?: string;
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    parentNo: string;
+    
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    recordType: string;
 
-  @Column({ name: 'parent_no',nullable:true })
-  parentNo?: number;
+    @Column({type: 'integer', nullable: true})
+    referenceNo: number;
 
-  @Column({ name: 'record_type',nullable:true })
-  //recordType?: EnumIntervalType;
-  recordType?: string;
-
-  @Column({ name: 'reference_no',nullable:true })
-  referenceNo?: number;
-
-  @Column({ name: 'scale_no',nullable:true })
-  scaleNo?: number;
+    @Column({type: 'integer', nullable: true})
+    scaleNo: number;
 }
-
-// SELECT interval_no, interval_name, abbrev, b_age AS startMYA, t_age AS endMYA, abbrev, color, parent_no, record_type, reference_no, scale_no 
-//       FROM intervals
