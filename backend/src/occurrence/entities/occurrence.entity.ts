@@ -1,100 +1,116 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { Interval } from '../../interval/entities/interval.entity';
-
-@Entity('occurrences', { schema: 'paleo' })
+import { PrimaryColumn, PrimaryGeneratedColumn, Column, Entity, OneToOne, JoinColumn,ManyToMany } from "typeorm";
+import { Species } from '../../species/entities/species.entity';
+@Entity('occurrences', { database: 'paleo' })
 export class Occurrence {
   @PrimaryGeneratedColumn({ name: 'occurrence_no' })
   occurrenceNo: number;
 
-  @Column({ name: 'record_type', type: 'varchar', nullable: true })
+  // We will need to join manually since there is duplicated ids etc that need to be dealt with
+  // @OneToOne(() => Species,(species) => species.occurrence)
+  // @JoinColumn({
+  //   name: 'accepted_no',
+  //   referencedColumnName: 'acceptedNo',
+  // })
+  // species?: Species;
+  @ManyToMany(() => Species,(species) => species.occurrences,{
+
+  })
+  @JoinColumn({
+    name: 'occurrence_no',
+    referencedColumnName: 'occurrenceNo',
+  })
+  species?: Species[];
+
+
+  @Column({ name: 'collection_no' ,nullable: true })
+  collectionNo: number;
+
+  @Column({ name: "record_type" ,nullable: true })
   recordType: string;
 
-  // Uncomment and add other columns as needed
-  // @Column({ name: 'collection_no', type: 'varchar', nullable: true })
-  // collectionNo: string;
-
-  // @Column({ name: 'catalog_no', type: 'varchar', nullable: true })
-  // catalogNo: string;
-
-  @Column({ name: 'identified_name', type: 'varchar', nullable: true })
+  @Column({ name: "identified_name" ,nullable: true })
   identifiedName: string;
 
-  @Column({ name: 'identified_rank', type: 'varchar', nullable: true })
+  @Column({ name: "identified_rank" ,nullable: true })
   identifiedRank: string;
 
-  @Column({ name: 'identified_no', type: 'int', nullable: true })
+  @Column({ name: "identified_no" ,nullable: true })
   identifiedNo: number;
 
-  @Column({ name: 'accepted_name', type: 'varchar', nullable: true })
+  @Column({ name: "accepted_name" ,nullable: true })
   acceptedName: string;
 
-  @Column({ name: 'accepted_rank', type: 'varchar', nullable: true })
+  @Column({ name: "accepted_rank" ,nullable: true })
   acceptedRank: string;
 
-  @Column({ name: 'accepted_no', type: 'int', nullable: true })
+  @Column({ name: "accepted_no",nullable: true  })
   acceptedNo: number;
 
-  @Column({ name: 'early_interval', type: 'varchar', nullable: true })
+  @Column({ name: "early_interval",nullable: true  })
   earlyInterval: string;
 
-  @Column({ name: 'early_interval_no', type: 'int', nullable: true })
-  earlyIntervalNo: number;
+  @Column({ name: "late_interval",nullable: true  })
+  lateInterval: string;
 
-  // @ManyToOne(() => Interval, interval => interval.occurrences)
-  // interval: Interval;
+  @Column({ name: "max_ma",nullable: true  })
+  maxMya: number;
 
-  @Column({ name: 'late_interval_no', type: 'int', nullable: true })
-  lateIntervalNo: number;
+  @Column({ name: "min_ma",nullable: true  })
+  minMya: number;
 
-  @Column({ name: 'max_ma', type: 'double precision', nullable: true })
-  maxMa: number;
+  @Column({ name: "reference_no" ,nullable: true })
+  referenceNo: number;
 
-  @Column({ name: 'min_ma', type: 'double precision', nullable: true })
-  minMa: number;
+  @Column({ name: "cc" ,nullable: true  })
+  cc: string;
 
-  // Uncomment and add other columns as needed
-  // @Column({ name: 'reference_no', type: 'int', nullable: true })
-  // referenceNo: number;
+  @Column({ name: "latlng_basis"  ,nullable: true })
+  latlngBasis: string;
 
-  // @Column({ name: 'state', type: 'varchar', nullable: true })
-  // state: string;
+  @Column({ name: "latlng_precision" ,nullable: true  })
+  latlngPrecision: number;
 
-  // @Column({ name: 'county', type: 'varchar', nullable: true })
-  // county: string;
+  @Column({ name: "geogscale",nullable: true  })
+  geogscale: string;
 
-  @Column({ name: 'phylum', type: 'varchar', nullable: true })
+  @Column({ name: "phylum",nullable: true  })
   phylum: string;
 
-  @Column({ name: 'class', type: 'varchar', nullable: true })
+  @Column({ name: "class",nullable: true  })
   class: string;
 
-  @Column({ name: 'order', type: 'varchar', nullable: true })
+  @Column({ name: "order",nullable: true  })
   order: string;
 
-  @Column({ name: 'family', type: 'varchar', nullable: true })
+  @Column({ name: "family",nullable: true  })
   family: string;
 
-  @Column({ name: 'genus', type: 'varchar', nullable: true })
+  @Column({ name: "genus", nullable: true })
   genus: string;
 
-  @Column({ name: 'environment', type: 'varchar', nullable: true })
-  environment: string;
-
-  @Column({ name: 'paleoage', type: 'varchar', nullable: true })
-  paleoage: string;
-
-  @Column({ name: 'paleolng', type: 'double precision', nullable: true })
-  paleoLng: number;
-
-  @Column({ name: 'paleolat', type: 'double precision', nullable: true })
-  paleoLat: number;
-
-  @Column({ name: 'lng', type: 'double precision', nullable: true })
-  lng: number;
-
-  @Column({ name: 'lat', type: 'double precision', nullable: true })
-  lat: number;
-
-  @Column({ name: 'composition', type: 'varchar', nullable: true })
-  composition: string;
+  constructor() {
+    this.occurrenceNo = 0;
+    this.collectionNo = 0;
+    this.recordType = '';
+    this.identifiedName = '';
+    this.identifiedRank = '';
+    this.identifiedNo = 0;
+    this.acceptedName = '';
+    this.acceptedRank = '';
+    this.acceptedNo = 0;
+    this.earlyInterval = '';
+    this.lateInterval = '';
+    this.maxMya = 0;
+    this.minMya = 0;
+    this.referenceNo = 0;
+    this.cc = '';
+    this.latlngBasis = '';
+    this.latlngPrecision = 0;
+    this.geogscale = '';
+    this.phylum = '';
+    this.class = '';
+    this.order = '';
+    this.family = '';
+    this.genus = '';
+  }
 }

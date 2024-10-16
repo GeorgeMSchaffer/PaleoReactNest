@@ -3,7 +3,7 @@ export function buildRequestParams(query){
     const params: IRequestParams = {
       take: query?.take || 10,
       skip: query?.skip || 0,
-      orderBy: query?.orderBy || 'occurrenceNo',
+      orderBy: query?.orderBy || 'specimenNo',
       orderDir: query?.orderDir || 'DESC',
       queryParams: {
 

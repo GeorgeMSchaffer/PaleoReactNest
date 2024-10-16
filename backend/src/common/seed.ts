@@ -1,4 +1,5 @@
 import { createConnection, Connection } from "typeorm";
+import {test} from './data/test'
 import { Interval } from "../interval/entities/interval.entity";
 import { Taxa } from "../taxa/entities/taxa.entity";
 import { Species } from "../species/entities/species.entity";

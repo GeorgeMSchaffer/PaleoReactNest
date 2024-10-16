@@ -1,7 +1,7 @@
 import { Controller,Req, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { IntervalService } from './interval.service';
-import { CreateIntervalDto } from './DTOs/create-interval.dto';
-import { UpdateIntervalDto } from './DTOs/update-interval.dto';
+import { CreateIntervalDto } from './dto/create-interval.dto';
+import { UpdateIntervalDto } from './dto/update-interval.dto';
 import { IRequestParams } from 'src/common/types';
 import { buildRequestParams } from 'src/common/utils';
 
