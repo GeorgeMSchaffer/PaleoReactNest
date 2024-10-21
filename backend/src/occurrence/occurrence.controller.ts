@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { OccurrenceService } from './occurrence.service';
 import { CreateOccurrenceDto } from './DTOs/create-occurrence.dto';
 import { UpdateOccurrenceDto } from './DTOs/update-occurrence.dto';
@@ -8,14 +9,22 @@ import { get } from 'http';
 @Controller('/api/v1/occurrence')
 export class OccurrenceController {
   constructor(private readonly service: OccurrenceService) {}
+  constructor(private readonly service: OccurrenceService) {}
 
   @Post()
   create(@Body() createOccurrenceDto: CreateOccurrenceDto) {
     return this.service.create(createOccurrenceDto);
+    return this.service.create(createOccurrenceDto);
   }
 
   
+
+  
   @Get("/")
+  findAll(@Query() query) {
+    console.log('Get All occurrences with query:',query);
+    const params = buildRequestParams(query);
+    return this.service.findAll(params);
   findAll(@Query() query) {
     console.log('Get All occurrences with query:',query);
     const params = buildRequestParams(query);
@@ -41,10 +50,12 @@ export class OccurrenceController {
   @Patch('/:id')
   update(@Param('id') id: string, @Body() updateOccurrenceDto: UpdateOccurrenceDto) {
     return this.service.update(+id, updateOccurrenceDto);
+    return this.service.update(+id, updateOccurrenceDto);
   }
 
   @Delete('/:id')
   remove(@Param('id') id: string) {
+    return this.service.remove(+id);
     return this.service.remove(+id);
   }
 }

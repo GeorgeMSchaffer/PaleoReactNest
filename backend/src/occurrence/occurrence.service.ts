@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import {Interval} from '../interval/entities/interval.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import {IRequestParams} from "../common/types"
+import {IRequestParams} from "../common/types"
 @Injectable()
 export class OccurrenceService {
   constructor(
