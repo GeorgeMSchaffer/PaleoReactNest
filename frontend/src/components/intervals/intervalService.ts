@@ -9,7 +9,9 @@ import { buildApiUrl, intervalsJSONToInterval } from "../../common/utils";
 const headers = {
   "Content-Type": "application/json",
 };
-export async function searchIntervals(
+
+
+export async function fetchIntervals(
   filters: IFilterField[],
   pagination: IPaginationSettings
 ): Promise<Interval[]> {
@@ -34,6 +36,23 @@ export async function searchIntervals(
   console.log("🚀 ~ getAll ~ intervals:", intervals);
   return intervals;
 }
+
+export const fatchDiversityByIntervalName = (intervalName) => {
+  return fetch(`/api/interval/diversity/${intervalName}`, {
+    method: "GET",
+    headers: headers,
+  })
+};
+
+export const fetchDiversity = () => {
+  return fetch(`/api/interval/diversity`, {
+    method: "GET",
+    headers: headers,
+  });
+
+};
+
+
 
 export const getAllIntervals = () => {
   return fetch(`/api/interval/`, {
@@ -83,7 +102,7 @@ export const findByTitle = (title) => {
 };
 
 const TutorialService = {
-  searchIntervals,
+  searchIntervals: fetchIntervals,
   getAllIntervals,
   create,
   update,

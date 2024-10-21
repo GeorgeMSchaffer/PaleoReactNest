@@ -1,38 +1,27 @@
 import { Diversity, DiversityJSON } from "../../common/types";
-import { diversityJSONToDiversity } from "../../common/utils";
 const headers = {
   "Content-Type": "application/json",
 };
-export async function getAll(): Promise<Diversity[]> {
-  let diversity: Diversity[] = [];
-  try {
-    const response = await fetch("/api/diversity/", {
+export async function fetchDiversity(): Promise<Diversity[]> {
+
+    const response = await fetch("/api/occurrence/diversity/", {
       method: "GET",
       headers: headers,
-    }); // as unknown as DiversityJSON[];
-    const data: DiversityJSON[] =
-      (await (response.json() as unknown as DiversityJSON[])) || [];
-
-    diversity = diversityJSONToDiversity(data);
-  } catch (error) {
-    console.error(error);
-    //rethrow for display
-    throw new Error("Error getting all diversitys");
-  }
-  // make sure to catch any error
-  console.log("🚀 ~ getAll ~ diversitys:", diversity);
-  return diversity;
+    });
+    const diversity = await response.json() as unknown as Diversity[];
+    console.log('Diversity:',diversity);
+    return diversity as unknown as Diversity[];
 }
 
 export const get = (id) => {
-  return fetch(`/api/diversity/${id}`, {
+  return fetch(`/api/occurrence/diversity/${id}`, {
     method: "GET",
     headers: headers,
   });
 };
 
 export const create = (data) => {
-  return fetch("/api/diversity", {
+  return fetch("/api/occurrence/diversity", {
     method: "POST",
     headers: headers,
     body: JSON.stringify(data), // body data type must match "Content-Type" header
@@ -40,7 +29,7 @@ export const create = (data) => {
 };
 
 export const update = (id, data) => {
-  return fetch(`/api/diversity/${id}`, {
+  return fetch(`/api/occurrence/diversity/${id}`, {
     method: "PUT",
     headers: headers,
     body: JSON.stringify(data),
@@ -48,7 +37,7 @@ export const update = (id, data) => {
 };
 
 export const remove = (id) => {
-  return fetch(`/api/diversity/${id}`, {
+  return fetch(`/api/occurrence/diversity/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -58,7 +47,7 @@ export const remove = (id) => {
 };
 
 export const removeAll = () => {
-  return fetch(`/api/diversity`, {
+  return fetch(`/api/occurrence/diversity`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -68,11 +57,11 @@ export const removeAll = () => {
 };
 
 export const findByTitle = (title) => {
-  return fetch(`/diversity?title=${title}`);
+  return fetch(`/api/occurrence/diversity?title=${title}`);
 };
 
 const TutorialService = {
-  getAll,
+  fetchDiversity,
   get,
   create,
   update,

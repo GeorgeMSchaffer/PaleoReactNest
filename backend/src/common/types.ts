@@ -234,7 +234,7 @@ export enum EnumIntervalType {
     reference_no = "reference_no",
   }
   
-  export interface OccurrenceJSON {
+  export type TOccurrenceJSON = {
     occurrence_no: number;
     record_type: string;
     collection_no: number;
@@ -259,7 +259,7 @@ export enum EnumIntervalType {
     family: string;
     genus: string;
   }
-  export interface Interval {
+  export type TInterval = {
     intervalNo: number;
     recordType: EnumIntervalType;
     intervalName: string;
@@ -270,7 +270,7 @@ export enum EnumIntervalType {
     bAge: number;
     referenceNo: number;
   }
-  export interface IntervalJSON {
+  export type TIntervalJSON = {
     interval_no: number;
     record_type: EnumIntervalType;
     interval_name: string;
@@ -281,6 +281,30 @@ export enum EnumIntervalType {
     b_age: number;
     reference_no: number;
   }
+
+  export type TDiversity =  {
+    intervalName: string;
+    minMa: number;
+    maxMa: number;
+    countOfPhylum: number;
+    countOfClasses: number;
+    countOfOrders: number;
+    countOfFamilies: number;
+    countOfGenera: number;
+    countOfSpecies: number;
+  }
+  export type TDiversityJSON =  {
+    early_interval: string;
+    min_mya: number;
+    max_mya: number;
+    count_of_phylum: number;
+    count_of_classes: number;
+    count_of_orders: number;
+    count_of_families: number;
+    count_of_genera: number;
+    count_of_species: number;
+  }
+  
   
   export interface ChartData {
     labels: string[];

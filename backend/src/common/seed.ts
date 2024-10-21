@@ -1,5 +1,4 @@
 import { createConnection, Connection } from "typeorm";
-import {test} from './data/test'
 import { Interval } from "../interval/entities/interval.entity";
 import { Taxa } from "../taxa/entities/taxa.entity";
 import { Species } from "../species/entities/species.entity";
@@ -21,6 +20,7 @@ async function seed() {
     // const occurrenceData = JSON.parse(fs.readFileSync(path.join(__dirname, './data/occurrences.json'),'utf-8'));
   
    
+    
   let connection: Connection;
 
   try {

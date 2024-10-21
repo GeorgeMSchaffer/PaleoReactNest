@@ -1,7 +1,7 @@
-
-export function TaxaPage(){
+import {DiversityContainer} from '../components/diversity/DiversityContainer';
+export function DiversityPage(){
     return (<>
-        <h1>Taxa</h1>
-        <p>TODO: Add taxa page</p>    
+        <h1>Diversity by Interval</h1>
+        <DiversityContainer />
     </>)
 }

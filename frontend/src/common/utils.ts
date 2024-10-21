@@ -153,28 +153,6 @@ export async function fetchDiversity(params?: {}): Promise<Diversity[]> {
     });
   return diversity;
 }
-export function diversityJSONToDiversity(
-  diversityJSON: DiversityJSON[]
-): Diversity[] {
-  const diversity: Diversity[] = [];
-  diversityJSON.map((p: DiversityJSON) => {
-    const record = {
-      intervalNo: p.interval_no,
-      intervalName: p.interval_name,
-      maxMya: p.max_mya,
-      minMya: p.min_mya,
-      xBL: p.x_bL,
-      xFt: p.x_Ft,
-      xFL: p.x_FL,
-      xBt: p.x_Bt,
-      sampledInBin: p.sampled_in_bin,
-      impliedInBin: p.implied_in_Bin,
-      numOccurances: p.num_occs,
-    } as Diversity;
-    diversity.push(record);
-  });
-  return diversity;
-}
 export function fetchPrevalence(): Prevalence[] {
   let prevalence: Prevalence[] = [];
   console.log("fetching prevalence data");
@@ -326,7 +304,7 @@ export const buildApiUrl = (
   var start = page * perPage;
   var skip = page * perPage + perPage;
 
-  let url = `/api/${entity}/?take=${perPage}&skip=${skip}&`;
+  let url = `/api/v1/${entity}/?take=${perPage}&skip=${skip}&`;
   filters.map((filter) => {
     url += `record_type${filter.operator}${filter.value}&`;
     //[TODO] add filter.operator vs static equals

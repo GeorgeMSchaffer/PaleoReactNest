@@ -6,7 +6,7 @@ import { setError, setLoading } from '../../store/rootReducer';
 import store, { setIntervals } from '../../store/store';
 import { TablePagination } from '../shared/TablePagination';
 import IntervalList from "./IntervalList";
-import { searchIntervals } from './intervalService';
+import { fetchIntervals } from './intervalService';
 export function IntervalsContainer(){
 
     //[TODO] Move to Redux to store
@@ -23,7 +23,7 @@ export function IntervalsContainer(){
         (async () => {
             try{
                 dispatch(setLoading(true));
-                const data = await searchIntervals(filterFields,pagination);
+                const data = await fetchIntervals(filterFields,pagination);
                 console.log("🚀 ~ Dispatching setIntervals with ~ data:", data)
                 dispatch(setIntervals(data));
             }
@@ -49,7 +49,7 @@ export function IntervalsContainer(){
 
             (async () => {
                 dispatch(setLoading(true));
-                const data = await searchIntervals(filterFields,pagination);
+                const data = await fetchIntervals(filterFields,pagination);
                 console.log("🚀 ~ Dispatching setIntervals with ~ data:", data)
                 dispatch(setIntervals(data));
                 dispatch(setLoading(false));

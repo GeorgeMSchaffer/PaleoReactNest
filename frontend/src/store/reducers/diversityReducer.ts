@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Diversity } from "../../common/types";
+import { 
+  TDiversity } from "../../common/types";
 interface IDiversityState {
-  diversity: Diversity[];
-  diversityToDisplay: Diversity[];
+  diversity: TDiversity[];
+  diversityToDisplay: TDiversity[];
 }
 const initialState: IDiversityState = {
   diversity: [],
@@ -13,11 +14,13 @@ const diversitySlice = createSlice({
   name: "diversity",
   initialState,
   reducers: {
-    setDiversity(state, action: PayloadAction<Diversity[]>) {
+    setDiversity(state, action: PayloadAction<TDiversity[]>) {
+      console.log(`Diversity SLICE !  setDiversity - state`,state, `payload`, action.payload);
       state.diversity = action.payload;
       state.diversityToDisplay = action.payload;
     },
-    setDiversityToDisplay(state, action: PayloadAction<Diversity[]>) {
+    
+    setDiversityToDisplay(state, action: PayloadAction<TDiversity[]>) {
       state.diversityToDisplay = action.payload;
     },
     //[TODO] //Filter Methods

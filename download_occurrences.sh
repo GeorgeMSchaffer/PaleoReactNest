@@ -10,8 +10,8 @@ fi
 for INTERVAL_ID in "$@"
 do
   # Construct the URL
-  URL="https://paleobiodb.org/data1.2/occs/list.json?&interval_id=${INTERVAL_ID}&vocab=pbdb&show=attr,class,phylo,genus,subgenus,ident,img,plant,abund,ecospace,coords,env,geo,paleoloc,loc,coll,taphonomy,timecompare,strat,time"
-  
+#  URL="https://paleobiodb.org/data1.2/occs/list.json?&interval_id=${INTERVAL_ID}&vocab=pbdb&show=attr,class,phylo,genus,subgenus,ident,img,plant,abund,ecospace,coords,env,geo,paleoloc,loc,coll,taphonomy,timecompare,strat,time"
+ URL = https://paleobiodb.org/data1.2/occs/list.json?&interval_id=${INTERVAL_ID}&vocab=pbdb&show=attr,class,phylo,genus,subgenus,ident,img,plant,abund,ecospace,coords,env,geo,paleoloc,loc,coll,taphonomy,timecompare,strat,time
   # Download the JSON file and save it with the appropriate name
   curl -o "./PROJECT_DATA/occurrences-${INTERVAL_ID}.json" "$URL"
   

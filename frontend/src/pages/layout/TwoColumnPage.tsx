@@ -67,6 +67,9 @@ export function TwoColumnPage(props: ITwoColumnPageProps) {
                             <NavLink style={linkStyle} to="/taxa">Taxa</NavLink>
                         </Grid>
                         <Grid size={2} style={navLinkStyle}>
+                            <NavLink style={linkStyle} to="/diversity">Diversity</NavLink>
+                        </Grid>
+                        <Grid size={2} style={navLinkStyle}>
                             <NavLink style={linkStyle} to="/charts">All Charts</NavLink>
                         </Grid>
        

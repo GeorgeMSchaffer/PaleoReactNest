@@ -6,7 +6,6 @@ import { Repository } from 'typeorm';
 import {Interval} from '../interval/entities/interval.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import {IRequestParams} from "../common/types"
-import {IRequestParams} from "../common/types"
 @Injectable()
 export class OccurrenceService {
   constructor(
@@ -47,17 +46,20 @@ export class OccurrenceService {
 
   private async getDiversityCounts(intervalName: string = "") {
     var query =  this.repo.createQueryBuilder('o')
-      .select('o.early_interval', 'early_interval')
-      .addSelect('COUNT(DISTINCT o.occurrence_no)', 'intervalName')
+      .select('o.early_interval', 'intervalName')
+      .addSelect('COUNT(DISTINCT o.occurrence_no)', 'countOfOccurrences')
       .addSelect('COUNT(DISTINCT o.family)', 'countOfFamilies')
       .addSelect('COUNT(DISTINCT o.class)', 'countOfClasses')
-      .addSelect('COUNT(DISTINCT o.phylum)', 'countOfOrders')
-      .addSelect('COUNT(DISTINCT o.order)', 'num_order')
+      .addSelect('COUNT(DISTINCT o.phylum)', 'countOfPhyla')
+      .addSelect('COUNT(DISTINCT o.order)', 'countOfOrders')
       .addSelect('COUNT(DISTINCT o.genus)', 'countOfGenera')
+      .addSelect('MAX(o.max_ma)', 'maxMa')
+      .addSelect('MIN(o.min_ma)', 'minMa')
       //.addSelect('i.color', 'color')
       //.leftJoin(Interval, 'i', 'o.early_interval = i.intervalName')
       .where('o.early_interval IS NOT NULL')
       .groupBy('o.early_interval')
+      .orderBy('MIN(o.min_ma)', 'DESC');
       //.addGroupBy('i.color')
 //      .getRawMany();
     if(intervalName.length){

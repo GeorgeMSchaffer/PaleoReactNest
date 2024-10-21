@@ -99,33 +99,59 @@ export interface PrevalenceJSON {
   num_occurances: number;
 }
 
-export interface Diversity {
-  intervalNo: number;
-  intervalName: string;
-  maxMya: number;
-  minMya: number;
-  xFt: number;
-  xBL: number;
-  xFL: number;
-  xBt: number;
-  sampledInBin: number;
-  impliedInBin: number;
-  numOccurances: number;
+export type TDiversityJSON = {
+  interval_name: string;
+  min_ma: number | null;
+  max_ma: number | null;
+  color: string | null;
+  count_of_phylum: number;
+  count_of_classes: number;
+  count_of_orders: number;
+  count_of_families: number;
+  count_of_genera: number;
+  count_of_occurences: number;
 }
 
-export interface DiversityJSON {
-  interval_no: number;
-  interval_name: string;
-  max_mya: number;
-  min_mya: number;
-  x_Ft: number;
-  x_bL: number;
-  x_FL: number;
-  x_Bt: number;
-  sampled_in_bin: number;
-  implied_in_Bin: number;
-  num_occs: number;
+export type TDiversity = {
+  intervalName: string;
+  countOfOccurrences: number | null;
+  countOfFamilies: number | null;
+  countOfClasses: string | null;
+  countOfPhyla: number;
+  countOfOrders: number;
+  countOfGenera: number;
+  maxMa: number;
+  minMa: number;
+
 }
+
+// export interface Diversity {
+//   intervalNo: number;
+//   intervalName: string;
+//   maxMya: number;
+//   minMya: number;
+//   xFt: number;
+//   xBL: number;
+//   xFL: number;
+//   xBt: number;
+//   sampledInBin: number;
+//   impliedInBin: number;
+//   numOccurances: number;
+// }
+
+// export interface DiversityJSON {
+//   interval_no: number;
+//   interval_name: string;
+//   max_mya: number;
+//   min_mya: number;
+//   x_Ft: number;
+//   x_bL: number;
+//   x_FL: number;
+//   x_Bt: number;
+//   sampled_in_bin: number;
+//   implied_in_Bin: number;
+//   num_occs: number;
+// }
 export interface Taxa {
   taxonNo: number;
   recordType: string;

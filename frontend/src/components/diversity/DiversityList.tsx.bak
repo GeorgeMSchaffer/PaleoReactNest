@@ -1,0 +1,53 @@
+import { FixedSizeList as List } from 'react-window';
+import { TDiversity } from "../../common/types";
+
+export interface DiversityListProps {
+    diversity: TDiversity[];
+}
+
+const Row = ({ index, style, data }) => {
+    const item = data[index];
+    return (
+        <div style={style} className="table-row">
+
+            <div className="table-cell">{item.intervalName}</div>
+            <div className="table-cell">{item.countOfOccurrences}</div>
+            <div className="table-cell">{item.countOfFamilies}</div>
+            <div className="table-cell">{item.countOfClasses}</div>
+            <div className="table-cell">{item.countOfPhyla}</div>
+            <div className="table-cell">{item.countOfOrders}</div>
+            <div className="table-cell">{item.countOfGenera}</div>
+        </div>
+    );
+};
+
+export function DiversityList(props: DiversityListProps) {
+    const data = props.diversity || [];
+    return (
+        <div className="p-4">
+            <b className="block mb-2 text-lg"># of Records {data.length}</b>
+            <div className="table-responsive">
+                <div className="table table-striped table-bordered">
+                    <div className="table-header">
+                        <div className="table-row">
+                            <div className="table-cell">Interval Name</div>
+                            <div className="table-cell">Unique Occurrences</div>
+                            <div className="table-cell">Unique Phyla</div>
+                            <div className="table-cell">Count of Orders</div>
+                            <div className="table-cell">Count of Genera</div>
+                        </div>
+                    </div>
+                    <List
+                        height={400}
+                        itemCount={data.length}
+                        itemSize={35}
+                        width="100%"
+                        itemData={data}
+                    >
+                        {Row}
+                    </List>
+                </div>
+            </div>
+        </div>
+    );
+}

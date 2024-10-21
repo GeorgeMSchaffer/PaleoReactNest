@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, OneToOne, JoinColumn, ManyToMany } from 'typeorm';
-import { Entity, Column, PrimaryGeneratedColumn,PrimaryColumn, OneToOne, JoinColumn, ManyToMany } from 'typeorm';
 import { Occurrence } from '../../occurrence/entities/occurrence.entity';
 @Entity('species')
 export class Species {

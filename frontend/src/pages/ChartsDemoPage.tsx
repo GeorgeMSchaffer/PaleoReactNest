@@ -1,16 +1,16 @@
 import React,{ useEffect } from "react";
 import { Diversity, Occurrence, Prevalence, Taxa } from "../common/types";
-import PrevalenceChart from "../components/diversity/DiversityBarChart";
+import PrevalenceChart from "../components/diversity/DiversityByIntervalChart";
 import { useAppSelector } from '../store/hooks';
 import { useDispatch } from "react-redux";
-import {searchIntervals,getAllIntervals} from '../components/intervals/intervalService'
+import {fetchIntervals,getAllIntervals} from '../components/intervals/intervalService'
 import {searchOccurrances,getAllOccurances} from '../components/occurances/occurrenceService'
 import { setLoading,setPagination,setError } from "../store/rootReducer";
 import { setOccurrences,setIntervals,setTaxa } from "../store/store";
 import { getAllTaxa } from "../components/taxa/TaxaService";
 import TaxaChart from '../components/taxa/TaxaChart';
 import OccuranceChart from "../components/occurances/OccuranceBarChart";
-import DiversityBarChart from "../components/diversity/DiversityBarChart";
+import DiversityByIntervalChart from "../components/diversity/DiversityByIntervalChart";
 import Grid from '@mui/material/Grid2';
 export  function ChartsDemoPage(){
     const dispatch = useDispatch()
@@ -41,7 +41,7 @@ export  function ChartsDemoPage(){
                 <OccuranceChart occurrences={occurances}/>
             </Grid>
             <Grid size={6}>
-                <DiversityBarChart diversity={diversity}/>
+                <DiversityByIntervalChart diversity={diversity}/>
             </Grid>
             <Grid size={6}>
             </Grid>

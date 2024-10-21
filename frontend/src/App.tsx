@@ -8,6 +8,7 @@ import { TaxaContainer } from './components/taxa/TaxaContainer';
 import { ChartsDemoPage } from './pages/ChartsDemoPage';
 import TwoColumnPage from './pages/layout/TwoColumnPage';
 import { useAppSelector } from './store/hooks';
+import { DiversityPage } from './pages/DiversityPage';
 function App() {
     const errors = useAppSelector((state) => state.root.errors);
     const occuranceFilters = useAppSelector((state) => state.occurances.filterFields);
@@ -47,6 +48,11 @@ function App() {
                     element={<TwoColumnPage 
                         //leftColumn={<MainLeftColumnFilters/>} 
                         rightColumn={<TaxaContainer/>}/>} 
+                />
+                <Route path='/diversity'
+                    element={<TwoColumnPage
+                        //leftColumn={<MainLeftColumnFilters/>}
+                        rightColumn={<DiversityPage/>}/>}
                 />
 
             </Routes>
