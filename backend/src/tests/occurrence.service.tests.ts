@@ -1,14 +1,14 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { OccurrenceService } from './occurrence.service';
-import { EnumRanks } from '../common/types'; // Adjust the import path as necessary
+import { OccurrenceService } from 'src/occurrence/occurrence.service';
+import { EnumRanks } from 'src/common/types'; // Adjust the import path as necessary
+import { IntervalService } from 'src/interval/interval.service';
 
 describe('OccurrenceService', () => {
   let service: OccurrenceService;
-  let repo: { find: ReturnType<typeof vi.fn> };
+  let repo: { find: jest.Mock };
 
   beforeEach(() => {
-    repo = { find: vi.fn() };
-    service = new OccurrenceService(repo as any);
+    repo = { find: jest.fn() };
+    service = new OccurrenceService(repo as any,new IntervalService(repo as any));
   });
 
   it('should call repo.find with correct parameters', async () => {
@@ -39,17 +39,16 @@ describe('OccurrenceService', () => {
     });
   });
 
-  it('Get the correct results from the DB', async () => {
+  it('Get the correct results from the DB',async()=>{
     const intervalName = 'Induan';
     const rank = EnumRanks.SPECIES;
     const expectedResults = [{ earlyInterval: intervalName, acceptedRank: rank, diversity: 0.5 }];
     repo.find.mockResolvedValue(expectedResults);
 
     const result = await service.getDiversityByRankAndInterval(intervalName, rank);
-    console.log("🚀 ~ it ~ result:", result)
 
     expect(result).toEqual(expectedResults);
-  });
+  })
 
   // Add more test cases as needed
 });

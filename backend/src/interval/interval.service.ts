@@ -4,7 +4,7 @@ import { UpdateIntervalDto } from './DTOs/update-interval.dto';
 import { Interval } from './entities/interval.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { IRequestParams } from 'src/common/types';
+import { EnumRanks, IRequestParams } from 'src/common/types';
 
 @Injectable()
 export class IntervalService {
@@ -14,24 +14,26 @@ export class IntervalService {
   ) { }
   
   create(createIntervalDto: CreateIntervalDto) {
-    new Error('Method not implemented.');
+    throw new Error('Method not implemented.');
     //return this.repo.save(createIntervalDto);
   }
 
   findAll(params:IRequestParams) {
+    console.log("🚀 ~ IntervalService ~ findAll ~ params:", params)
     //return `This action returns all interval`;
     const filters = params.queryParams;
-
+    const orderBy = params.orderBy || 'intervalNo';
+    const orderDir = params.orderDir || 'ASC';
     return this.repo.find({
       order: {
-        [params.orderBy]: params.orderDir
+        [orderBy]: orderDir
       },
       take: params.take,
       skip: params.skip,
-      relations: ['species'],
+      //relations: ['species'],
       where: {...filters},
-//      cache: true,
-    });
+      cache: true, //The list is not going to change often, so we can cache it
+    })
   }
 
   findOne(id: number) {
@@ -39,7 +41,7 @@ export class IntervalService {
   }
 
   update(id: number, updateIntervalDto: UpdateIntervalDto) {
-    new Error('Method not implemented.');
+    throw new Error('Method not implemented.');
      //return this.repo.update(id, updateIntervalDto); 
   }
 
@@ -49,5 +51,9 @@ export class IntervalService {
   findByRecordType(recordType: string) {
     console.log("🚀 ~ IntervalService ~ findByRecordType ~ recordType:", recordType)
     return this.repo.findBy({ recordType: recordType });
+  }
+
+  doesIntervalExists(intervalName: string) {
+    return this.repo.exists({ where: { intervalName: intervalName } })
   }
 }

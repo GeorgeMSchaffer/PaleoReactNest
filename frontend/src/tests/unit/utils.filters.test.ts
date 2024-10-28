@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   EnumIntervalType,
-  Interval,
+  TInterval,
   IntervalJSON,
   Occurrence,
   OccurrenceJSON,
@@ -40,7 +40,7 @@ describe("filterIntervalsByMya", () => {
     );
     const intervalType = EnumIntervalType.AGE;
     // Assuming there are no intervals within the age range 40 to 50
-    const filtered = intervals.filter((interval: Interval) => {
+    const filtered = intervals.filter((interval: TInterval) => {
       return interval.recordType === intervalType;
     });
     console.log(
@@ -143,9 +143,9 @@ it("Should filter occurances by valid clade", () => {
 function filterIntervalsByFilterKey(
   filterKey: string,
   filterValue,
-  intervals: Interval[]
-): Interval[] {
-  const filtered = intervals.filter((interval: Interval) => {
+  intervals: TInterval[]
+): TInterval[] {
+  const filtered = intervals.filter((interval: TInterval) => {
     console.log(
       `Filtering by ${filterKey} and ${filterValue} of type`,
       intervals

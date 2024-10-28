@@ -3,7 +3,7 @@ import { Interval } from "../interval/entities/interval.entity";
 import { Taxa } from "../taxa/entities/taxa.entity";
 import { Species } from "../species/entities/species.entity";
 import { Occurrence } from "../occurrence/entities/occurrence.entity";
-import species from "./data/species";
+//import species from "./data/species";
 import occurrences from "./data/occurrences";
 //import intervals from "./data/intervals";
 //import taxa from "./data/taxa";

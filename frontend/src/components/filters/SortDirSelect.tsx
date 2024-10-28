@@ -14,8 +14,8 @@ export function SortDirSelect(props: IResultsPerPageProps) {
 
     const dispatch = useAppDispatch();
     const pagination = useAppSelector(state => state.root.settings.pagination);
-    const {sortBy,sortOrder} = pagination;
-    const {perPage} = pagination;
+    const {orderBy,orderDir} = pagination;
+    const {skip: perPage} = pagination;
     //[TODO] event handlers like on
     const onChange = (event: ChangeEvent<HTMLSelectElement>)=>{
         //call an optional onChange callback from the parent component
@@ -30,8 +30,8 @@ export function SortDirSelect(props: IResultsPerPageProps) {
                 <div>{label} - {selectedValue}</div>
             </FormLabel>
             <Form.Select onChange={(evt)=>onChange(evt)} multiple aria-label={`Filter By ${label}`}>
-                <option selected={sortOrder.toLowerCase() === "asc"} value={5}>ASC</option>
-                <option selected={sortOrder.toLowerCase() === "desc"} value={10}>DESC</option>
+                <option selected={orderBy.toLowerCase() === "asc"} value={5}>ASC</option>
+                <option selected={orderBy.toLowerCase() === "desc"} value={10}>DESC</option>
 
             </Form.Select>
         </FormGroup>

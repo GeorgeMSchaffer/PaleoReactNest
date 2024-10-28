@@ -10,6 +10,16 @@ export enum EnumIntervalType {
 } 
 
 
+export enum EnumRanks {
+  DOMAIN = "Domain",
+  KINGDOM = "Kingdom",
+  PHYLUM = "Phylum",
+  CLASS = "Class",
+  ORDER = "Order",
+  FAMILY = "Family",
+  GENUS = "Genus",
+  SPECIES = "Species",
+}
 
 export enum EnumIntervalType {
     eon = "eon",

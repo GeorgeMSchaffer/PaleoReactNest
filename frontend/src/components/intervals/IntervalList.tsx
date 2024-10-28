@@ -1,23 +1,23 @@
 import {
     type MRT_ColumnDef
 } from 'material-react-table';
-import { Interval } from "../../common/types.js";
+import { TInterval } from "../../common/types.js";
 import { MuiVirtualTable } from '../shared/MuiVirtualTable';
 import Grid from '@mui/material/Grid2'
 import { Container } from '@mui/material';
 interface IntervalListProps {
-    intervals: Interval[]
+    intervals: TInterval[]
 }
 
 export default function IntervalList(props: IntervalListProps) {
     const intervals = props.intervals || [];
-    const columns : MRT_ColumnDef<Interval>[] =[
+    const columns : MRT_ColumnDef<TInterval>[] =[
         { accessorKey: 'intervalNo', header: 'Interval Number' },
         { accessorKey: 'intervalName', header: 'Interval Name' },
         { accessorKey: 'abbrv', header: 'Abbreviation' },
         { accessorKey: 'recordType', header: 'Record Type' },
-        { accessorKey: 'tAge', header: 'Top Age' },
-        { accessorKey: 'bAge', header: 'Base Age' },
+        { accessorKey: 'minMa', header: 'Interval Start (MYA)' },
+        { accessorKey: 'maxMa', header: 'Interval End (MYA)' },
         { accessorKey: 'referenceNo', header: 'Reference Number' }
     ];
     return (

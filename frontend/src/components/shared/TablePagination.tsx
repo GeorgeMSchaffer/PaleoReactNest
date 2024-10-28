@@ -10,7 +10,7 @@ export interface IListPaginationProps {
 export function TablePagination(props: IListPaginationProps) {
   const pagination = useAppSelector((state) => state.root.settings.pagination);
   const { data } = props;
-  const { page, perPage } = pagination;
+  const { take: page, skip: perPage } = pagination;
   const dispatch = useAppDispatch();
 
   const onPaginationChange = (event: React.ChangeEvent<unknown>, value: number) => {

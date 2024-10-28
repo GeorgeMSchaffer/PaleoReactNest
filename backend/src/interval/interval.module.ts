@@ -4,6 +4,8 @@ import { IntervalController } from './interval.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {Interval} from './entities/interval.entity';
 import { MysqlDbConfigService } from 'src/common/MysqlDbConfigService';
+import { OccurrenceService } from 'src/occurrence/occurrence.service';
+import { OccurrenceModule } from 'src/occurrence/occurrence.module';
 @Module({
   imports: [TypeOrmModule.forFeature([Interval])],
   exports: [TypeOrmModule, IntervalService],

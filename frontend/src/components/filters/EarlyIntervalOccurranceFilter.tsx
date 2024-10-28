@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
-import { EnumIntervalType, IFilterField } from "../../common/types";
+import { EnumIntervalType, IQueryFilterField } from "../../common/types";
 import { getEnumKeys } from '../../common/utils';
 import { addOccurranceFilter, clearOccurranceFilters } from "../../store/reducers/occurrenceReducer";
 import store from '../../store/store';
@@ -31,7 +31,7 @@ export function EarlyIntervalOccurranceFilter(props: IEarlyIntervalOccurranceFil
         setSelectedValue(selectedValue);
         if(selectedValue){
 
-            const filter: IFilterField = {
+            const filter: IQueryFilterField = {
                 field: "early_interval",
                 value: selectedValue,
                 operator: "="

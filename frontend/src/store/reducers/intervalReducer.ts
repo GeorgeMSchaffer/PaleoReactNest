@@ -1,16 +1,16 @@
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   IAppSettings,
-  IFilterField,
-  Interval,
+  IQueryFilterField,
+  TInterval,
   IPaginationSettings,
 } from "../../common/types";
 interface IIntervalState {
-  intervals: Interval[];
-  intervalsToDisplay: Interval[];
+  intervals: TInterval[];
+  intervalsToDisplay: TInterval[];
   loading: boolean;
   settings: IAppSettings;
-  filterFields: IFilterField[];
+  filterFields: IQueryFilterField[];
 
   //  pagination: IPaginationSettings;
 }
@@ -19,10 +19,10 @@ const initialState: IIntervalState = {
   loading: false,
   settings: {
     pagination: {
-      page: 0,
-      perPage: 10,
-      sortBy: "intervalNo",
-      sortOrder: "asc",
+      take: 25,
+      skip: 0,
+      orderBy: "intervalNo",
+      orderDir: "asc",
     },
   },
   filterFields: [],
@@ -38,16 +38,16 @@ const initialState: IIntervalState = {
 //     default:
 //       return state;
 //   }
-export const getIntervalsAction = createAction<Interval[]>("GET_INTERVALS");
-export const fetchIntervalsAction = createAction<Interval>("FETCH_INTERVALS");
-export const setIntervalsAction = createAction<Interval[]>("SET_INTERVALS");
-export const filterIntervalsByIntervalNameAction = createAction<Interval[]>(
+export const getIntervalsAction = createAction<TInterval[]>("GET_INTERVALS");
+export const fetchIntervalsAction = createAction<TInterval>("FETCH_INTERVALS");
+export const setIntervalsAction = createAction<TInterval[]>("SET_INTERVALS");
+export const filterIntervalsByIntervalNameAction = createAction<TInterval[]>(
   "FILTER_INTERVALS_BY_INTERVAL_NAME"
 );
-export const filterIntervalsByIntervalNoAction = createAction<Interval[]>(
+export const filterIntervalsByIntervalNoAction = createAction<TInterval[]>(
   "FILTER_INTERVALS_BY_INTERVAL_NO"
 );
-export const filterIntervalsByIntervalsByTypeAction = createAction<Interval[]>(
+export const filterIntervalsByIntervalsByTypeAction = createAction<TInterval[]>(
   "FILTER_INTERVALS_BY_INTERVAL_TYPE"
 );
 
@@ -58,11 +58,11 @@ const intervalSlice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = true;
     },
-    setIntervals: (state, action: PayloadAction<Interval[]>) => {
+    setIntervals: (state, action: PayloadAction<TInterval[]>) => {
       state.intervals = action.payload;
       state.intervalsToDisplay = action.payload;
     },
-    setIntervalsToDisplay: (state, action: PayloadAction<Interval[]>) => {
+    setIntervalsToDisplay: (state, action: PayloadAction<TInterval[]>) => {
       state.intervalsToDisplay = action.payload;
     },
     setSettings: (state, action: PayloadAction<IAppSettings>) => {
@@ -95,7 +95,7 @@ const intervalSlice = createSlice({
     clearIntervalFilters(state) {
       state.filterFields = [];
     },
-    addIntervalFilter(state, action: PayloadAction<IFilterField>) {
+    addIntervalFilter(state, action: PayloadAction<IQueryFilterField>) {
       // //if there is already a filter for this field append it to the value so early_interval=XYZ,ABC
       // debugger;
       // if (state.filterFields.find((f) => f.field === action.payload.field)) {
@@ -108,9 +108,9 @@ const intervalSlice = createSlice({
 
       state.filterFields = [action.payload];
     },
-    removeIntervalFilter(state, action: PayloadAction<IFilterField>) {
+    removeIntervalFilter(state, action: PayloadAction<IQueryFilterField>) {
       state.filterFields = state.filterFields.filter(
-        (filter: IFilterField) => filter.field !== action.payload.field
+        (filter: IQueryFilterField) => filter.field !== action.payload.field
       );
     },
   },

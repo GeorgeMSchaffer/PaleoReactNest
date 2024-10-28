@@ -39,7 +39,7 @@ export function TwoColumnPage(props: ITwoColumnPageProps) {
             <Container style={{marginBottom:5}}>
             <Snackbar open={errors?.length ? true : false}>
                 <>
-                <Alert  severity="error"><b>Errors:</b>{JSON.stringify(errors)}</Alert>
+                <Alert severity="error"><b>Errors:</b>{JSON.stringify(errors)}</Alert>
                 </>
     </Snackbar>
     <AppBar>

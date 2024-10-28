@@ -16,23 +16,23 @@ export class Interval {
     // occurrences: Occurrence[];
 
     @Column({type: 'integer', nullable: true, name: 'min_ma'})
-    @ApiProperty({name:'min_ma'})
+   // @ApiProperty({name:'min_ma'})
     minMa: number;
 
     @Column({type: 'integer', nullable: true, name: 'max_ma'})
-    @ApiProperty({name:'max_ma'})
+   // @ApiProperty({name:'max_ma'})
     maxMa: number;
 
     @Column({ type: 'varchar', length: 255, nullable: true,name: 'color'})
-    @ApiProperty({name:'color'})
+   // @ApiProperty({name:'color'})
     color: string;
 
     @Column({ type: 'varchar', length: 255, nullable: true, name: 'parent_no'})
-    @ApiProperty({name:'parent_no'})
+    //@ApiProperty({name:'parent_no'})
     parentNo: string;
     
     @Column({ type: 'varchar', length: 255, nullable: true, name: 'record_type'})
-    @ApiProperty({name:'record_type'})
+    //@ApiProperty({name:'record_type'})
     recordType: string;
 
     @Column({type: 'integer', nullable: true, name: 'reference_no'})

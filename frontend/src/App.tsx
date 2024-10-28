@@ -9,10 +9,12 @@ import { ChartsDemoPage } from './pages/ChartsDemoPage';
 import TwoColumnPage from './pages/layout/TwoColumnPage';
 import { useAppSelector } from './store/hooks';
 import { DiversityPage } from './pages/DiversityPage';
+import { IntervalsPage } from './pages/IntervalsPage';
+import { OccurrencesPage } from './pages/OccurrencesPage';
 function App() {
-    const errors = useAppSelector((state) => state.root.errors);
-    const occuranceFilters = useAppSelector((state) => state.occurances.filterFields);
-    const IntervalFilters = useAppSelector((state) => state.intervals.filterFields);
+    // const errors = useAppSelector((state) => state.root.errors);
+    // const occuranceFilters = useAppSelector((state) => state.occurances.filterFields);
+    // const IntervalFilters = useAppSelector((state) => state.intervals.filterFields);
     //[TODO] move error state to redux for sharing
 //    const [error,setError] = useState<string>('');//[TODO] add ability to display an array of errors with an error type
 
@@ -26,18 +28,25 @@ function App() {
                 <Route path='/' element={
                     <TwoColumnPage 
                         //leftColumn={<MainLeftColumnFilters/>} 
-                        rightColumn={<ChartsDemoPage/>}/>} 
+                        rightColumn={<IntervalsPage/>}/>} 
                     />
                 <Route path='/intervals' 
                     element={<TwoColumnPage 
                         //leftColumn={<MainLeftColumnFilters/>} 
                         rightColumn={<IntervalsContainer/>}/>} 
                 />
+                <Route path='/occurances/:intervalName' 
+                    element={
+                    <TwoColumnPage 
+                    //leftColumn={<MainLeftColumnFilters/>} 
+                    rightColumn={<OccurrencesPage/>}/>} 
+                />
+
                 <Route path='/occurances' 
                     element={
                     <TwoColumnPage 
                     //leftColumn={<MainLeftColumnFilters/>} 
-                    rightColumn={<OccurrenceContainer/>}/>} 
+                    rightColumn={<OccurrencesPage/>}/>} 
                 />
                 <Route path='/charts' element={
                     <TwoColumnPage 

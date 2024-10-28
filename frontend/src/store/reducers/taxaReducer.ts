@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   IAppSettings,
-  IFilterField,
+  IQueryFilterField,
   IPaginationSettings,
   Taxa,
 } from "../../common/types";
 interface IOccuranceState {
   taxa: Taxa[];
   taxaToDisplay;
-  filterFields: IFilterField[];
+  filterFields: IQueryFilterField[];
   settings: IAppSettings;
 }
 const initialState: IOccuranceState = {
@@ -18,10 +18,10 @@ const initialState: IOccuranceState = {
   //Each feature with a slice has it's own grid settings to apply on the result set being displayed related to that entity
   settings: {
     pagination: {
-      page: 0,
-      perPage: 10,
-      sortBy: "taxon_no",
-      sortOrder: "asc",
+      take: 25,
+      skip: 0,
+      orderBy: "taxon_no",
+      orderDir: "asc",
     }, // [TODO] this is a hack for now
   },
 };
@@ -46,12 +46,12 @@ const taxaSlice = createSlice({
     clearTaxaFilters(state) {
       state.filterFields = [];
     },
-    addTaxaFilter(state, action: PayloadAction<IFilterField>) {
+    addTaxaFilter(state, action: PayloadAction<IQueryFilterField>) {
       state.filterFields.push(action.payload);
     },
-    removeTaxaFilter(state, action: PayloadAction<IFilterField>) {
+    removeTaxaFilter(state, action: PayloadAction<IQueryFilterField>) {
       state.filterFields = state.filterFields.filter(
-        (filter: IFilterField) => filter.field !== action.payload.field
+        (filter: IQueryFilterField) => filter.field !== action.payload.field
       );
     },
 

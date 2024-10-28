@@ -1,9 +1,9 @@
 import {
-  Diversity,
-  DiversityJSON,
+  TDiversity,
+  TDiversityJSON,
   EnumEntityType,
-  IFilterField,
-  Interval,
+  IQueryFilterField,
+  TInterval,
   IntervalJSON,
   IPaginationSettings,
   Occurrence,
@@ -175,6 +175,7 @@ export function fetchPrevalence(): Prevalence[] {
 
   return prevalence;
 }
+
 export function prevalenceToPrevalenceJSON(
   json: PrevalenceJSON[]
 ): Prevalence[] {
@@ -192,8 +193,8 @@ export function prevalenceToPrevalenceJSON(
   return prevalence;
 }
 
-export function fetchIntervals(): Interval[] {
-  let intervals: Interval[] = [];
+export function fetchIntervals(): TInterval[] {
+  let intervals: TInterval[] = [];
   fetch("/interval", {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -219,9 +220,12 @@ export function fetchIntervals(): Interval[] {
 }
 export function intervalsJSONToInterval(
   intervalsJSON: IntervalJSON[]
-): Interval[] {
-  const intervals: Interval[] = [];
-  intervalsJSON.map((interval: IntervalJSON) => {
+): TInterval[] {
+  console.log("🚀 ~ intervalsJSON:", intervalsJSON)
+  const intervals: TInterval[] = [];
+  
+  
+  intervalsJSON?.length && intervalsJSON.map((interval: IntervalJSON) => {
     const _interval = {
       intervalNo: interval.interval_no,
       recordType: interval.record_type,
@@ -232,7 +236,7 @@ export function intervalsJSONToInterval(
       tAge: interval.t_age,
       bAge: interval.b_age,
       referenceNo: interval.reference_no,
-    } as Interval;
+    } as TInterval;
     intervals.push(_interval);
   });
   return intervals;
@@ -249,8 +253,8 @@ export function filterIntervalsByIntervalName(intervalName, intervals) {
 export function filterIntervalsByMya(
   minMya: number,
   maxMya: number,
-  intervals: Interval[]
-): Interval[] {
+  intervals: TInterval[]
+): TInterval[] {
   const filteredIntervals = intervals.filter((interval) => {
     return interval.tAge >= minMya && interval.bAge <= maxMya;
   });
@@ -272,7 +276,7 @@ export function filterOccurancesByGenus(
 
 export const buildApiUrl = (
   entity: EnumEntityType,
-  filters: IFilterField[],
+  filters: IQueryFilterField[],
   pagination: IPaginationSettings
 ): string => {
   const valueMap = {};
@@ -299,12 +303,13 @@ export const buildApiUrl = (
   const filterKeys = Object.keys(valueMap);
 
   console.log("🚀 ~ entity:", entity);
-  const { page, perPage, sortBy } = pagination;
+  const { take, skip, orderBy,orderDir } = pagination;
   //  const start = (page * perPage);
-  var start = page * perPage;
-  var skip = page * perPage + perPage;
 
-  let url = `/api/v1/${entity}/?take=${perPage}&skip=${skip}&`;
+  //if there is no sortby we omit it 
+  var orderClause = (orderBy) ? `&orderBy=${orderBy}&orderDir=${orderDir}` : '';
+
+  let url = `/api/${entity}/?take=${take}&skip=${skip}${orderClause}`;
   filters.map((filter) => {
     url += `record_type${filter.operator}${filter.value}&`;
     //[TODO] add filter.operator vs static equals

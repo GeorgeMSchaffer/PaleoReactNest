@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { OccurrenceService } from './occurrence.service';
 import { CreateOccurrenceDto } from './DTOs/create-occurrence.dto';
 import { UpdateOccurrenceDto } from './DTOs/update-occurrence.dto';
-import { IRequestParams } from 'src/common/types';
+import { EnumRanks, IRequestParams } from 'src/common/types';
 import { buildRequestParams } from 'src/common/utils';
 import { get } from 'http';
 @Controller('/api/v1/occurrence')
@@ -21,6 +21,12 @@ export class OccurrenceController {
   @Get("/")
   findAll(@Query() query) {
     console.log('Get All occurrences with query:',query);
+    // if(!query.orderBy){
+    //   query.orderBy = 'occurrenceNo';
+    // }
+    // if(!query.orderDir){
+    //   query.orderDir = 'ASC';
+    // }
     const params = buildRequestParams(query);
     return this.service.findAll(params);
   }
@@ -30,16 +36,26 @@ export class OccurrenceController {
   //   return this.service.findOne(+id);
   // }
 
-  @Get('/diversity/:intervalName')
-  getDiversityByIntervalName(@Param('intervalName') intervalName: string) {
-    return this.service.getDiversityByIntervalName(intervalName);
-  }
-
   @Get('/diversity')
   getDiversity() {
     return this.service.getDiversity();
   }
 
+  @Get('/interval/:intervalName/:rank')
+  //[TODO:] Add pagination interface
+  getDiversityByIntervalName(@Param('intervalName') intervalName: string,@Param('rank') rank:EnumRanks) {
+    return this.service.getDiversityByRankAndInterval(intervalName,rank);
+  }
+
+  @Get('/interval/:intervalName/')
+  //[TODO:] Add pagination interface
+  getOccurrencesByIntervalName(@Param('intervalName') intervalName: string) {
+    return this.service.getOccurrencesByIntervalName(intervalName);
+  }
+
+
+
+  
 
   @Patch('/:id')
   update(@Param('id') id: string, @Body() updateOccurrenceDto: UpdateOccurrenceDto) {

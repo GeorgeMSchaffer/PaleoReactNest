@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   IAppSettings,
-  IFilterField,
+  IQueryFilterField,
   IPaginationSettings,
   Occurrence,
 } from "../../common/types";
 interface IOccuranceState {
   occurances: Occurrence[];
   occurancesToDisplay;
-  filterFields: IFilterField[];
+  filterFields: IQueryFilterField[];
   settings: IAppSettings;
 }
 const initialState: IOccuranceState = {
@@ -18,10 +18,10 @@ const initialState: IOccuranceState = {
   //Each feature with a slice has it's own grid settings to apply on the result set being displayed related to that entity
   settings: {
     pagination: {
-      page: 0,
-      perPage: 10,
-      sortBy: "occurrence_no",
-      sortOrder: "asc",
+      take: 25,
+      skip: 0,
+      orderBy: "occurrence_no",
+      orderDir: "asc",
     }, // [TODO] this is a hack for now
   },
 };
@@ -70,12 +70,12 @@ const occuranceSlice = createSlice({
     clearOccurranceFilters(state) {
       state.filterFields = [];
     },
-    addOccurranceFilter(state, action: PayloadAction<IFilterField>) {
+    addOccurranceFilter(state, action: PayloadAction<IQueryFilterField>) {
       state.filterFields.push(action.payload);
     },
-    removeOccurrenceFilter(state, action: PayloadAction<IFilterField>) {
+    removeOccurrenceFilter(state, action: PayloadAction<IQueryFilterField>) {
       state.filterFields = state.filterFields.filter(
-        (filter: IFilterField) => filter.field !== action.payload.field
+        (filter: IQueryFilterField) => filter.field !== action.payload.field
       );
     },
 

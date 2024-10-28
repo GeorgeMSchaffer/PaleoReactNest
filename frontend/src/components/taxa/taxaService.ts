@@ -1,6 +1,6 @@
 import {
   EnumEntityType,
-  IFilterField,
+  IQueryFilterField,
   IPaginationSettings,
   Taxa,
   TaxaJSON,
@@ -12,7 +12,7 @@ const headers = {
 
 //[TODO] [REFACTOR]  A lot of these can be unified into a single service and just pass the entity type as a parameter
 export async function searchTaxa(
-  filters: IFilterField[],
+  filters: IQueryFilterField[],
   pagination: IPaginationSettings
 ): Promise<Taxa[]> {
   let taxa: Taxa[] = [];

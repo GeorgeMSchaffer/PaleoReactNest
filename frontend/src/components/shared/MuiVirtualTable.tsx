@@ -8,16 +8,16 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
-import { Diversity, Interval, Occurrence, Prevalence, Taxa } from '../../common/types';
+import { TDiversity, TInterval, Occurrence, Prevalence, Taxa } from '../../common/types';
 import OccuranceCard from '../occurances/OccurrenceCard';
   export interface IMuiVirtualTableProps {
-      data: Occurrence[] | Interval[] | Taxa[] | Diversity[] | Prevalence[];
-      columns: MRT_ColumnDef<Occurrence, any>[] | MRT_ColumnDef<Interval, any>[] | MRT_ColumnDef<Taxa, any>[] | MRT_ColumnDef<Diversity, any>[] | MRT_ColumnDef<Prevalence, any>[];
+      data: Occurrence[] | TInterval[] | Taxa[] | TDiversity[] | Prevalence[];
+      columns: MRT_ColumnDef<Occurrence, any>[] | MRT_ColumnDef<TInterval, any>[] | MRT_ColumnDef<Taxa, any>[] | MRT_ColumnDef<TDiversity, any>[] | MRT_ColumnDef<Prevalence, any>[];
   }
   
   export  function MuiVirtualTable(props: IMuiVirtualTableProps) {
     //[TODO] we no longer need the prop if we are doing this but be better to make it a functional component instead and passin in loading,ooccurances, pagination, and filters etc...
-    const data: Occurrence[] | Interval[] | Taxa[] | Diversity[] | Prevalence[] = props.data;
+    const data: Occurrence[] | TInterval[] | Taxa[] | TDiversity[] | Prevalence[] = props.data;
     const columns = props.columns;
       //   const isLoading = useAppSelector((state) => state.root.loading);
       // const pagination = useAppSelector((state) => state.occurances.settings.pagination);
@@ -79,6 +79,9 @@ import OccuranceCard from '../occurances/OccurrenceCard';
   
   const table = useMaterialReactTable<Occurrence>({
     columns,
+    muiFilterTextFieldProps: ({ column }) => ({
+      label: `Filter by ${column.columnDef.header}`,
+    }),
     data, //10,000 rows
     // defaultDisplayColumn: { enableResizing: true },
     // enableBottomToolbar: false,
@@ -95,11 +98,8 @@ import OccuranceCard from '../occurances/OccurrenceCard';
     // rowVirtualizerInstanceRef, //optional
     // rowVirtualizerOptions: { overscan: 5 }, //optionally customize the row virtualizer
     // columnVirtualizerOptions: { overscan: 2 }, //optionally customize the column virtualizer
-  });
-  
-      return (
-        
-           
+  });  
+      return (    
             <Container fluid>
               <Row>
                 <Col xs={12}>

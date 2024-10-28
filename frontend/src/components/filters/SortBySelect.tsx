@@ -9,11 +9,11 @@ export interface IResultsPerPageProps {
     selectedValue: string;
     onChange?: Function;
 }
-export function SortBySelect(props: IResultsPerPageProps) {
+export function OrderBySelect(props: IResultsPerPageProps) {
     const {options=[],label="",selectedValue=""}  = props;
     const dispatch = useAppDispatch();
     const pagination = useAppSelector(state => state.root.settings.pagination);
-    const {perPage} = pagination;
+    const {skip: perPage} = pagination;
     //[TODO] event handlers like on
     const onChange = (event: ChangeEvent<HTMLSelectElement>)=>{
         //call an optional onChange callback from the parent component

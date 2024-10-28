@@ -69,15 +69,15 @@ export const DiversityByIntervalChart = (
       },
       },
       datasets: [
-        {
-          label: 'Total Occurrences',
-          type:'line',
-          data: values,
-          labels: labels,
-          backgroundColor: 'red',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1,
-        },
+        // {
+        //   label: 'Total Occurrences',
+        //   type:'line',
+        //   data: values,
+        //   labels: labels,
+        //   backgroundColor: 'red',
+        //   borderColor: 'rgba(75, 192, 192, 1)',
+        //   borderWidth: 1,
+        // },
         {
           type:'bar',
           label: 'Families',

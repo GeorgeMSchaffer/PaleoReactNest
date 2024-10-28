@@ -2,8 +2,9 @@ import { Controller,Req, Get, Post, Body, Patch, Param, Delete, Query } from '@n
 import { IntervalService } from './interval.service';
 import { CreateIntervalDto } from './DTOs/create-interval.dto';
 import { UpdateIntervalDto } from './DTOs/update-interval.dto';
-import { IRequestParams } from 'src/common/types';
+import { EnumRanks,IRequestParams } from 'src/common/types';
 import { buildRequestParams } from 'src/common/utils';
+
 
 @Controller('/api/v1/interval')
 export class IntervalController {
@@ -17,10 +18,15 @@ export class IntervalController {
 
   @Get("/")
   findAll(@Query() query) {
-    const params:IRequestParams = buildRequestParams(query);
-
+    console.log('Get All INTERVALS with query:',query);
+    const params = buildRequestParams(query);
+    console.log("🚀 ~ IntervalController ~ findAll ~ params:", params)
+    //if there is not orderBy, we use a defualt one specific to the interval entity, hence the overwrite of the default orderBy
+    if(!query.orderBy){
+      params.orderBy = 'intervalNo';
+    }
+    console.log("🚀 ~ IntervalController ~ findAll ~ params:", params)
     return this.service.findAll(params);
-
   }
 
   @Get(':id')

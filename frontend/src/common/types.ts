@@ -7,6 +7,18 @@ export enum EnumIntervalType {
   int = "int",
 }
 
+// domain->kingdom->phylum->class->order->family->genus->species
+export enum EnumRanks {
+  Domain = "Domain",
+  Kingdom = "Kingdom",
+  Phylum = "Phylum",
+  Class = "Class",
+  Order = "Order",
+  Family = "Family",
+  Genus = "Genus",
+  Species = "Species",
+}
+
 export enum EnumDomains {
   EUKARYA = "Eukarya",
   BACTERIA = "Bacteria",
@@ -69,7 +81,16 @@ export enum EnumEntityType {
   Taxa = "taxa",
   Prevalence = "prevalence",
   Diversity = "diversity",
-  Interval = "intervals",
+  Interval = "interval",
+}
+export interface IRequestParams {
+  take: number;
+  skip: number;
+  orderBy: string;
+  orderDir: string;
+  queryParams: {
+    [key: string]: string;
+  }
 }
 
 export interface IAppSettings {
@@ -77,10 +98,13 @@ export interface IAppSettings {
 }
 
 export interface IPaginationSettings {
-  page: number;
-  perPage: number;
-  sortBy: string;
-  sortOrder: string;
+  take: number;
+  skip: number;
+  orderBy: string;
+  orderDir: string;
+  queryParams?: {
+    [key: string]: string;
+  }
 }
 
 export interface Prevalence {
@@ -269,16 +293,17 @@ export interface OccurrenceJSON {
   family: string;
   genus: string;
 }
-export interface Interval {
+export type TInterval = {
   intervalNo: number;
   recordType: EnumIntervalType;
   intervalName: string;
   abbrv: string;
   parentNo: number;
   color: string;
-  tAge: number;
-  bAge: number;
+  maxMa: number;
+  minMa: number;
   referenceNo: number;
+  scaleNo: number;
 }
 export interface IntervalJSON {
   interval_no: number;
@@ -287,8 +312,8 @@ export interface IntervalJSON {
   abbrv: string;
   parent_no: number;
   color: string;
-  t_age: number;
-  b_age: number;
+  max_mya: number;
+  min_mya: number;
   reference_no: number;
 }
 
@@ -319,15 +344,15 @@ export interface IError extends IMessage {
   statckTrace?: string;
 }
 
-export interface IFilterField {
+export interface IQueryFilterField {
   field: string;
-  value: string;
+  value: string | string[];
   operator: string;
   type?: string;
   label?: string;
 }
 
-export interface IOccurancesFilterField extends IFilterField {
+export interface IOccurancesFilterField extends IQueryFilterField {
   field: EnumOccuranceFilterFields;
 // }
 // export interface IIntervalsFilterField extends IFilterField {

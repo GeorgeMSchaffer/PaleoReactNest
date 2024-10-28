@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import { useAppSelector } from '../../store/hooks';
 import { LineController,LineElement,PointElement,BarElement,BarController } from 'chart.js';
 import {Paper,Container,Box} from '@mui/material'
-import { Interval } from '../../common/types';
+import { TInterval } from '../../common/types';
 
 //import { Chart, registerables } from 'chart.js';
 

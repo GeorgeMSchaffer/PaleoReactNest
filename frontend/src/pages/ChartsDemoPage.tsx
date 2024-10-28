@@ -4,7 +4,7 @@ import PrevalenceChart from "../components/diversity/DiversityByIntervalChart";
 import { useAppSelector } from '../store/hooks';
 import { useDispatch } from "react-redux";
 import {fetchIntervals,getAllIntervals} from '../components/intervals/intervalService'
-import {searchOccurrances,getAllOccurances} from '../components/occurances/occurrenceService'
+import {fetchOccurrances,getAllOccurances} from '../components/occurances/occurrenceService'
 import { setLoading,setPagination,setError } from "../store/rootReducer";
 import { setOccurrences,setIntervals,setTaxa } from "../store/store";
 import { getAllTaxa } from "../components/taxa/TaxaService";
@@ -18,7 +18,7 @@ export  function ChartsDemoPage(){
     //let intervals:Interval[]=[];
     const occurances:Occurrence[]=useAppSelector((state)=>state.occurances.occurances)
     const diversity:Diversity[]= useAppSelector((state)=> state.diversity.diversity)
-    const isLoading = useAppSelector((state)=>state.root.loading)
+    const isLoading = useAppSelector((state)=>state.root.isLoading)
     React.useEffect(() => {
         (async () => {
             dispatch(setLoading(true));            

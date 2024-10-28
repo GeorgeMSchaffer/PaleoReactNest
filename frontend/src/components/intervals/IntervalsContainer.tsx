@@ -46,14 +46,11 @@ export function IntervalsContainer(){
     React.useEffect(() => {
         dispatch(setLoading(true));
         try{
-
-            (async () => {
-                dispatch(setLoading(true));
-                const data = await fetchIntervals(filterFields,pagination);
-                console.log("🚀 ~ Dispatching setIntervals with ~ data:", data)
-                dispatch(setIntervals(data));
-                dispatch(setLoading(false));
-            })()
+            fetchIntervals(filterFields, pagination)
+            .then((intervals) => {
+                console.log("��� ~ Dispatching setIntervals with ~ intervals:", intervals)
+                dispatch(setIntervals(intervals));
+            });
         } 
         catch(ex:any)
         {
@@ -81,6 +78,7 @@ export function IntervalsContainer(){
         <>
            <TablePagination data={intervals}/>
            <IntervalList intervals={intervals}/>
+           {JSON.stringify(intervals)}
        </>
         
     )

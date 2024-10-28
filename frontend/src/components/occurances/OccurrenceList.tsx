@@ -21,7 +21,7 @@ export interface IOccurrenceList {
 export  function OccuranceList(props: IOccurrenceList) {
   //[TODO] we no longer need the prop if we are doing this but be better to make it a functional component instead and passin in loading,ooccurances, pagination, and filters etc...
     const occurances = useAppSelector((state) => state.occurances.occurancesToDisplay) || [];
-    const isLoading = useAppSelector((state) => state.root.loading);
+    const isLoading = useAppSelector((state) => state.root.isLoading);
     const pagination = useAppSelector((state) => state.occurances.settings.pagination);
     const [sorting, setSorting] = useState<MRT_SortingState>([]);
     const rowVirtualizerInstanceRef = useRef<MRT_RowVirtualizer>(null);

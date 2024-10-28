@@ -1,29 +1,37 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  Diversity,
+  TDiversity,
   EnumMessageType,
   IAppSettings,
   IError,
   IMessage,
-  Interval,
+  TInterval,
   IPaginationSettings,
   Occurrence,
   Prevalence,
   Taxa,
+  EnumRanks,
 } from "../common/types";
+import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
 // Define the state interfaces
 interface RootState {
-  diversity: Diversity[];
+  diversity: TDiversity[];
   messages: IMessage[];
   errors: IError[];
-  intervals: Interval[];
+  intervals: TInterval[];
   occurances: Occurrence[];
   prevalence: Prevalence[];
   status: "idle" | "loading" | "succeeded" | "failed";
   taxa: Taxa[];
-  loading: boolean;
+  isLoading: boolean;
   settings: IAppSettings;
+  filters: {
+    rank: EnumRanks;
+    intervalName: string;
+    minMYA: number;
+    maxMYA: number;
+  };
 }
 
 // Define the filters interface
@@ -37,16 +45,22 @@ const initialState: RootState = {
   occurances: [],
   status: "idle",
   errors: [],
-  loading: false,
+  isLoading: false,
   settings: {
     pagination: {
-      page: 0,
-      perPage: 10,
-      sortBy: "taxonName",
-      sortOrder: "asc",
+      take: 0,
+      skip: 25,
+      orderBy: "",
+      orderDir: "asc",
     },
   }, // [TODO] this is a hack for now
   messages: [], //[TODO] display of messages and handling of them should be based on EnumMessageType only
+  filters: {
+    rank: EnumRanks.Species,
+    intervalName: "",
+    minMYA: 0,
+    maxMYA: 0,
+  }
 };
 
 // const taxaSlice = createSlice({
@@ -104,7 +118,8 @@ const rootSlice = createSlice({
       state.messages.push(action.payload);
     },
     setLoading(state, action: PayloadAction<boolean>) {
-      state.loading = true;
+      console.log("🚀 ~ setLoading ~ state, action:", state, action)
+      state.isLoading = action.payload;
     },
     // Add more reducers as needed
   },

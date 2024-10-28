@@ -1,7 +1,7 @@
 import {
   EnumEntityType,
-  IFilterField,
-  Interval,
+  IQueryFilterField,
+  TInterval,
   IntervalJSON,
   IPaginationSettings,
 } from "../../common/types";
@@ -12,21 +12,25 @@ const headers = {
 
 
 export async function fetchIntervals(
-  filters: IFilterField[],
+  filters: IQueryFilterField[],
   pagination: IPaginationSettings
-): Promise<Interval[]> {
-  let intervals: Interval[] = [];
+): Promise<TInterval[]> {
+  console.log("🚀 ~ pagination:", pagination)
+  let intervals: TInterval[] = [];
   try {
+    // if(!pagination.orderBy){
+    //   pagination.orderBy = "intervalNo";
+    // }
     const apiURL = buildApiUrl(EnumEntityType.Interval, filters, pagination);
     console.log("🚀 ~ apiURL:", apiURL);
     const response = await fetch(apiURL, {
       method: "GET",
       headers: headers,
     }); // as unknown as IntervalJSON[];
-    const data: IntervalJSON[] =
-      (await (response.json() as unknown as IntervalJSON[])) || [];
+    console.log('INTERVALS RESPONSE',response);
+    intervals = await response.json() as unknown as TInterval[];
 
-    intervals = intervalsJSONToInterval(data);
+//    intervals = intervalsJSONToInterval(data);
   } catch (error) {
     console.error(error);
     //rethrow for display

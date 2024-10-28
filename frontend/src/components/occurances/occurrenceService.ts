@@ -1,6 +1,6 @@
 import {
   EnumEntityType,
-  IFilterField,
+  IQueryFilterField,
   IPaginationSettings,
   Occurrence,
   OccurrenceJSON,
@@ -10,8 +10,8 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-export async function searchOccurrances(
-  filters: IFilterField[],
+export async function fetchOccurrances(
+  filters: IQueryFilterField[],
   pagination: IPaginationSettings
 ): Promise<Occurrence[]> {
   console.log("🚀 ~ params:", pagination);
