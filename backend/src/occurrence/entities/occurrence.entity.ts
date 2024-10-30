@@ -36,15 +36,15 @@ export class Occurrence {
 
   @Column({ name: 'early_interval', type: 'varchar', nullable: true })
   earlyInterval: string;
+  
+  @Column({ name: 'late_interval', type: 'varchar', nullable: true })
+  lateInterval: string;
 
   @Column({ name: 'early_interval_no', type: 'int', nullable: true })
-  earlyIntervalNo: number;
+  lateIntervalNo: number;
 
   // @ManyToOne(() => Interval, interval => interval.occurrences)
   // interval: Interval;
-
-  @Column({ name: 'late_interval_no', type: 'int', nullable: true })
-  lateIntervalNo: number;
 
   @Column({ name: 'max_ma', type: 'double precision', nullable: true })
   maxMa: number;
@@ -56,11 +56,11 @@ export class Occurrence {
   // @Column({ name: 'reference_no', type: 'int', nullable: true })
   // referenceNo: number;
 
-  // @Column({ name: 'state', type: 'varchar', nullable: true })
-  // state: string;
+  @Column({ name: 'state', type: 'varchar', nullable: true })
+  state: string;
 
-  // @Column({ name: 'county', type: 'varchar', nullable: true })
-  // county: string;
+  @Column({ name: 'county', type: 'varchar', nullable: true })
+  county: string;
 
   @Column({ name: 'phylum', type: 'varchar', nullable: true })
   phylum: string;
@@ -90,11 +90,45 @@ export class Occurrence {
   paleoLat: number;
 
   @Column({ name: 'lng', type: 'double precision', nullable: true })
-  lng: number;
+  lng?: number;
 
   @Column({ name: 'lat', type: 'double precision', nullable: true })
-  lat: number;
+  lat?: number;
 
   @Column({ name: 'composition', type: 'varchar', nullable: true })
-  composition: string;
+  composition?: string;
+  
+@Column({name:"abund_unit", nullable:true})
+abundUnit?: string;
+@Column({name:"taxon_environment", nullable:true})
+taxonEnvironment?: string;
+@Column({name:"environment_basis", nullable:true})
+environmentBasis?: string;
+@Column({name:"motility", nullable:true})
+motility?: string;
+@Column({name:"life_habit", nullable:true})
+lifeHabit?: string;
+@Column({name:"vision", nullable:true})
+vision?: string;
+@Column({name:"diet", nullable:true})
+diet?: string;
+@Column({name:"reproduction", nullable:true})
+reproduction?: string;
+@Column({name:"ontogeny", nullable:true})
+ontogeny?: string;
+
+@Column({name:"time_contain", nullable:true})
+timeContain?: string;
+@Column({name:"time_major", nullable:true})
+timeMajor?: string;
+@Column({name:"time_buffer", nullable:true})
+timeBuffer?: string;
+@Column({name:"time_overlap", nullable:true})
+timeOverlap?: string;
+@Column({name:"formation", nullable:true})
+formation?: string;
+@Column({name:"stratgroup", nullable:true})
+stratGroup?: string;
+@Column({name:"member", nullable:true})
+member?: string;
 }

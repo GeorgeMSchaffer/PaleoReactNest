@@ -10,50 +10,34 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-export async function fetchOccurrances(
+export function fetchOccurrances(
   filters: IQueryFilterField[],
   pagination: IPaginationSettings
-): Promise<Occurrence[]> {
+): Occurrence[] {
   console.log("🚀 ~ params:", pagination);
   let occurrences: Occurrence[] = [];
-  try {
     const apiURL = buildApiUrl(EnumEntityType.Occurrence, filters, pagination);
-    const response = await fetch(apiURL, {
+    fetch(apiURL, {
       ...pagination,
       method: "GET",
       headers: headers,
-    }); // as unknown as OccurrenceJSON[];
-    const data: OccurrenceJSON[] =
-      (await (response.json() as unknown as OccurrenceJSON[])) || [];
-
-    occurrences = occurrencesJSONToOccurrences(data);
-  } catch (error) {
-    console.error(error);
-    //rethrow for display
-    throw new Error("Error getting all occurrences");
-  }
-  // make sure to catch any error
-  console.log("🚀 ~ getAll ~ occurrences:", occurrences);
-  return occurrences;
-}
-export const getAllOccurances = async (params: IPaginationSettings) => {
-  let occurrences: Occurrence[] = [];
-  try {
-    const response = await fetch(`/api/occurrence/`, {
-      method: "GET",
-      headers: headers,
-      ...params,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("🚀 ~ .then ~ data:", data)
+      occurrences = data as unknown as Occurrence[];
+      return occurrences;
+    })
+    .catch((error) => {
+      console.error(error);
+      throw new Error("Error getting all occurrences");
     });
-    const data: OccurrenceJSON[] =
-      (await (response.json() as unknown as OccurrenceJSON[])) || [];
-    occurrences = occurrencesJSONToOccurrences(data);
-  } catch (err) {
-    console.error("Failed to retrive all occurances.ERROR:", err);
-    throw err;
-  } finally {
+    
+    console.log("🚀 ~ occurrences:", occurrences)
     return occurrences;
   }
-};
+
+   
 export const getOccuranceByID = (id, params: IPaginationSettings) => {
   return fetch(`/api/occurrence/${id}`, {
     method: "GET",
@@ -64,7 +48,7 @@ export const getOccuranceByID = (id, params: IPaginationSettings) => {
 
 
 export const create = (data, params: IPaginationSettings) => {
-  return fetch("/api/occurrence/?_start=10&_end=20", {
+  return fetch("/api/occurrence/", {
     method: "POST",
     headers: headers,
     body: JSON.stringify(data), // body data type must match "Content-Type" header

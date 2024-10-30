@@ -136,15 +136,15 @@ export function TaxaJSONToTaxa(taxaJSON: TaxaJSON[]): Taxa[] {
   });
   return taxas;
 }
-export async function fetchDiversity(params?: {}): Promise<Diversity[]> {
-  let diversity: Diversity[] = [];
+export async function fetchDiversity(params?: {}): Promise<TDiversity[]> {
+  let diversity: TDiversity[] = [];
   fetch("/diversity/", {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   })
     .then((response) => response.json())
-    .then((data: DiversityJSON[]) => {
-      data.map((p: DiversityJSON) => {
+    .then((data: TDiversityJSON[]) => {
+      data.map((p: TDiversityJSON) => {
         diversity = diversityJSONToDiversity(data);
       });
     })
@@ -174,6 +174,7 @@ export function fetchPrevalence(): Prevalence[] {
     });
 
   return prevalence;
+  
 }
 
 export function prevalenceToPrevalenceJSON(
@@ -200,6 +201,7 @@ export function fetchIntervals(): TInterval[] {
     headers: { "Content-Type": "application/json" },
   })
     .then((response) => {
+      console.log("🚀 ~ .then ~ response:", response)
       if (!response.ok) {
         throw new Error(
           `Could not fetch intervals a network error occurred ${response.status} ${response.statusText}`

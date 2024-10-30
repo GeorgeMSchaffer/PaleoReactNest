@@ -3,8 +3,8 @@ import { EnumMessageType, IError, Occurrence } from "../../common/types";
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setError, setLoading, setOccurrences } from '../../store/store';
 import { OccuranceList } from "./OccurrenceList";
-import { getAllOccurances, fetchOccurrances } from "./occurrenceService";
-import { fetchIntervals } from "../../common/utils";
+import { fetchOccurrances } from "./occurrenceService";
+import { fetchIntervals } from "../intervals/intervalService";
 import { IntervalFilter } from "../filters";
 import RankFilter from "../filters/RankFilter";
 import { setIntervals } from "../../store/store";
@@ -20,13 +20,15 @@ export function OccurrenceContainer(){
     const pagination = useAppSelector((state) => state.occurances.settings.pagination);
     const filters = useAppSelector((state) => state.occurances.filterFields);
     const intervals = useAppSelector((state) => state.intervals.intervals);
-    const Occurrences = useAppSelector((state) => state.occurances.occurances);
+    const occurrences = useAppSelector((state) => state.occurances.occurances);
+    const intervalFilters = useAppSelector((state) => state.intervals.filterFields);
+    const intervalPagination = useAppSelector((state) => state.intervals.settings.pagination);
+
     const [selectedInterval, setSelectedInterval] = React.useState<string>("");
     const [filtered, setFiltered] = React.useState<Occurrence[]>(data);
     React.useEffect(() => {
         dispatch(setLoading(true));
         try{
-            (async () => {
                 //Is an interval name being provided via the url, then filter occurrences to that interval only.
                 if(params?.length){
                     setSelectedInterval(intervalName)
@@ -35,17 +37,18 @@ export function OccurrenceContainer(){
                     }
    
                 }
-                const occurrences = await getAllOccurances(pagination);
+                const occurrences = fetchOccurrances(filters,pagination);
+                console.log("🚀 ~ React.useEffect ~ occurrences:", occurrences)
                 dispatch(setOccurrences(occurrences));
+                dispatch(setLoading(false));
+
                 // if the intervals have not been fetched, fetch them
-                console.log('Fetching intervals - current intervals:',intervals);
                 if(!intervals.length){
-                  const _intervals = await fetchIntervals();
+                    dispatch(setLoading(true));
+                    const _intervals = fetchIntervals(intervalFilters,intervalPagination);
                   console.log("🚀 ~ _intervals:", _intervals)
                   dispatch(setIntervals(_intervals));
                 }
-                dispatch(setLoading(false));
-            })()
         } 
         catch(ex:any)
         {
@@ -61,14 +64,15 @@ export function OccurrenceContainer(){
             dispatch(setLoading(false));
          }
 }
-    ,[dispatch])
+    ,[])
 
     
     const onIntervalFilterChange = (evt: React.SyntheticEvent, value: string[], reason: any) => {
         console.log('Interval Filter Change!', value, evt);
         // Implement your filter logic here and return true or false
         setSelectedInterval(value);
-        const _filtered = Occurrences.filter(o => value.includes(o.earlyInterval));
+        const _filtered = occurrences.filter(o => value.includes(o.earlyInterval));
+        console.log("🚀 ~ onIntervalFilterChange ~ _filtered:", _filtered)
         setFiltered(_filtered);
 
         console.log("🚀 ~ onIntervalFilterChange ~ filtered:", _filtered)
@@ -76,9 +80,8 @@ export function OccurrenceContainer(){
     }
     return (<div>
         <b># of occurances: {data.length}</b>
-        <b>INTERVAL FILTER HERE</b>
         <IntervalFilter intervals={intervals} onFilterChange={onIntervalFilterChange}/>
-        {filtered?.length ?
+        {occurrences?.length ?
             <OccuranceList occurances={filtered} />
             : <div>Loading...</div>
         }

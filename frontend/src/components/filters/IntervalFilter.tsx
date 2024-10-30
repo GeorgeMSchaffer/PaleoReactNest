@@ -54,7 +54,7 @@ export function IntervalFilter(props: IIntervalFilterProps) {
        <Autocomplete 
         multiple
         disabled={loading} 
-        options={intervals.map((d) => d.intervalName)} 
+        options={intervals?.length ? intervals.map((d) => d.intervalName) : []} 
         value={selectedValue}
         onChange={(evt, value, reason) => onFilterChange(evt,value,reason)} 
         renderInput={(params) => 

@@ -56,7 +56,6 @@ export class OccurrenceController {
 
 
   
-
   @Patch('/:id')
   update(@Param('id') id: string, @Body() updateOccurrenceDto: UpdateOccurrenceDto) {
     return this.service.update(+id, updateOccurrenceDto);

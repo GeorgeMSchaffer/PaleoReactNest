@@ -20,7 +20,7 @@ const initialState: IOccuranceState = {
     pagination: {
       take: 25,
       skip: 0,
-      orderBy: "occurrence_no",
+      orderBy: "occurrenceNo",
       orderDir: "asc",
     }, // [TODO] this is a hack for now
   },

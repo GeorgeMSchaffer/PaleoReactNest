@@ -77,7 +77,7 @@ export enum EnumClade {
 }
 
 export enum EnumEntityType {
-  Occurrence = "occurrences",
+  Occurrence = "occurrence",
   Taxa = "taxa",
   Prevalence = "prevalence",
   Diversity = "diversity",
@@ -215,9 +215,11 @@ export interface Occurrence {
   acceptedRank: string;
   acceptedNo: number;
   earlyInterval: string;
+  earlyIntervalNo: number;
   lateInterval: string;
-  maxMya: number;
-  minMya: number;
+  lateIntervalNo: number;
+  maxMa: number;
+  minMa: number;
   referenceNo: number;
   cc: string;
   latlngBasis: string;
@@ -228,6 +230,23 @@ export interface Occurrence {
   order: string;
   family: string
   genus: string;
+  abundUnit?: string;
+  taxonEnvironment?: string;
+  environmentBasis?: string;
+  motility?: string;
+  lifeHabit?: string;
+  vision?: string;
+  diet?: string;
+  reproduction?: string;
+
+  ontogeny?: string;
+  timeContain?: string;
+  timeMajor?: string;
+  timeBuffer?: string;
+  timeOverlap?: string;
+  formation?: string;
+  stratGroup?: string;
+  member?: string;
 }
 
 //Currently this overlaps with the Occurance JSON interface, so it's worth revisiting if this is needed
